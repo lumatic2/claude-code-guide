@@ -4,7 +4,7 @@ import SideNav from "@/components/SideNav";
 import "./globals.css";
 
 const notoSansKr = Noto_Sans_KR({
-  variable: "--font-sans",
+  variable: "--font-noto",
   subsets: ["latin"],
   weight: ["400", "500", "700"],
 });
