@@ -23,9 +23,8 @@ export default function Home() {
     <div className="flex flex-col gap-16 py-12">
       {/* Hero */}
       <section className="flex flex-col gap-6">
-        <h1 className="text-4xl font-bold tracking-tight text-zinc-50 sm:text-5xl">
-          Claude Code<br />
-          <span className="text-zinc-400">완벽 가이드</span>
+        <h1 className="text-4xl font-bold tracking-tight text-zinc-50 sm:text-5xl" style={{textWrap: "balance"}}>
+          Claude Code <span className="text-zinc-400">완벽 가이드</span>
         </h1>
         <p className="max-w-xl text-lg text-zinc-400 leading-relaxed">
           AI 코딩 어시스턴트를 처음부터 실무까지.

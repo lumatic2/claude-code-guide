@@ -52,7 +52,7 @@ export default function SideNav() {
           <p className="text-xs font-medium uppercase tracking-wide text-zinc-400">
             Claude Code Guide
           </p>
-          <h1 className="mt-2 text-xl font-bold text-zinc-100">입문자 문서</h1>
+          <p className="mt-2 text-xl font-bold text-zinc-100">입문자 문서</p>
         </div>
         <ul className="space-y-1">
           {navItems.map((item) => (
