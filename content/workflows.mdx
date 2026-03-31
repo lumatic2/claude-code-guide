@@ -1,0 +1,119 @@
+import Callout from "@/components/Callout";
+import StepCard from "@/components/StepCard";
+
+# 실전 워크플로우
+
+## Checkpointing — 안전한 작업
+
+Claude Code는 파일을 수정하기 전 자동으로 상태를 저장합니다.
+
+| 동작 | 방법 |
+|------|------|
+| 직전 상태로 롤백 | `Esc × 2` 또는 `/rewind` |
+| 컨텍스트 압축 | `/compact` |
+| 특정 시점으로 복구 | `/rewind [번호]` |
+
+<Callout type="warning" title="부수 효과는 되돌릴 수 없음">
+파일 변경은 롤백 가능하지만, 외부 API 호출이나 DB 변경은 되돌릴 수 없습니다.
+대규모 작업 전에는 `!git commit`으로 체크포인트를 만들어두세요.
+</Callout>
+
+## Fast Mode — 빠른 반복
+
+`/fast` 명령으로 최대 2.5배 빠른 응답 속도를 활성화합니다.
+
+```
+> /fast
+```
+
+- 동일한 Claude Opus 4.6 모델, 속도만 향상
+- 상태바에 ↯ 아이콘으로 활성 여부 확인
+- 디버깅·빠른 반복 작업에 적합
+- 비용이 높으므로 일상 작업엔 표준 모드 권장
+
+<Callout type="tip" title="Fast Mode 활용 타이밍">
+에러를 빠르게 수정하거나, 여러 가설을 연속으로 검증할 때 켜두면 효율적입니다.
+</Callout>
+
+## GitHub Actions 연동
+
+PR이 열릴 때 Claude Code가 자동으로 코드 리뷰를 실행합니다.
+
+<StepCard step="1" title="GitHub App 설치">
+
+```
+> /install-github-app
+```
+
+</StepCard>
+
+<StepCard step="2" title="워크플로우 파일 생성">
+
+`.github/workflows/claude-review.yml`:
+
+```yaml
+name: Claude Code Review
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: anthropics/claude-code-action@main
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+```
+
+</StepCard>
+
+<StepCard step="3" title="API 키 등록">
+
+GitHub 레포 → Settings → Secrets → `ANTHROPIC_API_KEY` 추가
+
+</StepCard>
+
+<Callout type="info" title="자동화 가능한 작업">
+코드 리뷰 외에도 이슈 기반 코드 구현, 문서 자동 업데이트 등 CI/CD 전반에 활용할 수 있습니다.
+</Callout>
+
+## MCP — 외부 도구 연결
+
+Model Context Protocol(MCP)로 외부 서비스를 Claude Code에 연결합니다.
+
+```bash
+# MCP 서버 추가
+claude mcp add --transport stdio <name> -s <scope> -- <command>
+```
+
+| 스코프 | 범위 |
+|--------|------|
+| `user` | 모든 프로젝트에서 사용 |
+| `project` | 현재 프로젝트만 |
+| `local` | 로컬 전용 (git 제외) |
+
+**활용 예시:**
+- GitHub — 이슈·PR 조회 및 생성
+- Notion / Obsidian — 문서 읽기·쓰기
+- DB — 쿼리 실행
+- Slack — 메시지 전송
+
+<Callout type="tip" title="MCP 서버 확인">
+`claude mcp list`로 현재 등록된 서버 목록을 확인할 수 있습니다.
+</Callout>
+
+## 멀티에이전트 팀 (실험적)
+
+여러 Claude Code 인스턴스가 병렬로 협력하는 모드입니다.
+
+```bash
+export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=true
+claude
+```
+
+<Callout type="warning" title="비용 주의">
+멀티에이전트는 비용이 높습니다. 프론트/백엔드/테스트 동시 개발처럼
+명확히 분리 가능한 복합 과제에만 사용하세요.
+tmux 분할 화면과 함께 사용하면 진행 상황을 한눈에 볼 수 있습니다.
+</Callout>

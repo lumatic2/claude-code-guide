@@ -10,6 +10,7 @@ const navItems = [
   { href: "/guide/setup", label: "설치 가이드" },
   { href: "/guide/basics", label: "기본 사용법" },
   { href: "/guide/advanced", label: "고급 설정" },
+  { href: "/guide/workflows", label: "실전 워크플로우" },
   { href: "/cheatsheet", label: "치트시트" },
 ];
 
