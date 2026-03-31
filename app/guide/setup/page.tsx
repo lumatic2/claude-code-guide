@@ -16,7 +16,7 @@ export default function SetupPage() {
   const filePath = path.join(process.cwd(), "content", "setup.mdx");
   const source = readFileSync(filePath, "utf-8");
   return (
-    <article className="prose prose-invert max-w-none">
+    <article className="prose prose-invert max-w-none prose-table:overflow-x-auto">
       <MDXRemote source={source} components={components} />
     </article>
   );

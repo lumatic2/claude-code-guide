@@ -16,7 +16,7 @@ export default function WorkflowsPage() {
   const filePath = path.join(process.cwd(), "content", "workflows.mdx");
   const source = readFileSync(filePath, "utf-8");
   return (
-    <article className="prose prose-invert max-w-none">
+    <article className="prose prose-invert max-w-none prose-table:overflow-x-auto">
       <MDXRemote source={source} components={components} />
     </article>
   );
