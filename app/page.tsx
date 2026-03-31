@@ -43,14 +43,18 @@ export default function Home() {
 
       {/* Feature cards */}
       <section className="grid gap-4 sm:grid-cols-3">
-        {features.map((f) => (
+        {features.map((f, i) => (
           <Link
             key={f.href}
             href={f.href}
-            className="rounded-xl border border-zinc-800 bg-zinc-900 p-6 transition hover:border-zinc-600 hover:bg-zinc-800"
+            className={
+              i === 0
+                ? "rounded-xl border border-emerald-500/40 bg-emerald-500/10 p-6 transition hover:border-emerald-400/60 hover:bg-emerald-500/15"
+                : "rounded-xl border border-zinc-800 bg-zinc-900 p-6 transition hover:border-zinc-600 hover:bg-zinc-800"
+            }
           >
-            <h2 className="mb-2 text-base font-semibold text-zinc-50">{f.title}</h2>
-            <p className="text-sm text-zinc-400 leading-relaxed">{f.desc}</p>
+            <h2 className={`mb-2 text-base font-semibold ${i === 0 ? "text-emerald-100" : "text-zinc-50"}`}>{f.title}</h2>
+            <p className={`text-sm leading-relaxed ${i === 0 ? "text-emerald-200/70" : "text-zinc-400"}`}>{f.desc}</p>
           </Link>
         ))}
       </section>
