@@ -4,6 +4,7 @@ import path from "path";
 import StepCard from "@/components/StepCard";
 import Callout from "@/components/Callout";
 import CodeBlock from "@/components/CodeBlock";
+import DocNav from "@/components/DocNav";
 
 const components = {
   StepCard,
@@ -16,8 +17,11 @@ export default function BasicsPage() {
   const filePath = path.join(process.cwd(), "content", "basics.mdx");
   const source = readFileSync(filePath, "utf-8");
   return (
+    <>
     <article className="prose prose-invert max-w-none prose-table:overflow-x-auto">
       <MDXRemote source={source} components={components} />
     </article>
+    <DocNav current="/guide/basics" />
+    </>
   );
 }
