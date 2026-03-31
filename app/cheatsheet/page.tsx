@@ -1,0 +1,22 @@
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { readFileSync } from "fs";
+import path from "path";
+import Callout from "@/components/Callout";
+import PrintButton from "@/components/PrintButton";
+
+const components = { Callout };
+
+export default function CheatsheetPage() {
+  const filePath = path.join(process.cwd(), "content", "cheatsheet.mdx");
+  const source = readFileSync(filePath, "utf-8");
+  return (
+    <div>
+      <div className="mb-4 flex justify-end">
+        <PrintButton />
+      </div>
+      <article className="prose prose-invert max-w-none">
+        <MDXRemote source={source} components={components} />
+      </article>
+    </div>
+  );
+}

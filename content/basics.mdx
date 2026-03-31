@@ -1,0 +1,56 @@
+import StepCard from "@/components/StepCard";
+import Callout from "@/components/Callout";
+
+# 핵심 사용법
+
+## 기본 명령어
+
+| 명령어 | 설명 |
+|--------|------|
+| `claude` | 대화형 세션 시작 |
+| `claude "질문"` | 단일 질문 후 종료 |
+| `/help` | 도움말 |
+| `/clear` | 컨텍스트 초기화 |
+| `/compact` | 컨텍스트 압축 |
+| `/exit` | 종료 |
+
+## 실습 예제
+
+<StepCard step="1" title="파일 생성 요청">
+
+```
+> hello.py 파일 만들고 Hello World 출력하는 코드 작성해줘
+```
+
+Claude Code가 파일을 생성하고 코드를 작성합니다.
+
+</StepCard>
+
+<StepCard step="2" title="버그 수정">
+
+```
+> app.js의 TypeError 고쳐줘
+```
+
+에러 메시지를 붙여넣으면 더 정확하게 수정합니다.
+
+</StepCard>
+
+<StepCard step="3" title="코드 설명 요청">
+
+```
+> utils/auth.ts 어떻게 동작하는지 설명해줘
+```
+
+파일 경로를 명시하면 정확한 분석을 받을 수 있습니다.
+
+</StepCard>
+
+<Callout type="tip" title="효과적인 프롬프트 작성법">
+목표 + 범위 + 완료 기준을 짧게 정리하면 품질이 안정됩니다.
+예: "app/api/users.ts에서 인증 미들웨어 추가하고, 토큰 없으면 401 반환해줘"
+</Callout>
+
+<Callout type="warning" title="주의">
+Claude Code는 실제 파일을 수정합니다. 중요한 변경 전에는 git commit을 먼저 해두세요.
+</Callout>

@@ -1,0 +1,46 @@
+import StepCard from "@/components/StepCard";
+import Callout from "@/components/Callout";
+import CodeBlock from "@/components/CodeBlock";
+
+# 설치 & 첫 실행
+
+<Callout type="info" title="사전 요구사항">
+Node.js 18 이상, npm/pnpm, Anthropic API 키가 필요합니다.
+</Callout>
+
+<StepCard step="1" title="Claude Code 설치">
+
+```bash
+npm install -g @anthropic-ai/claude-code
+```
+
+</StepCard>
+
+<StepCard step="2" title="API 키 설정">
+
+```bash
+export ANTHROPIC_API_KEY=sk-ant-...
+```
+
+Windows PowerShell:
+
+```powershell
+$env:ANTHROPIC_API_KEY = "sk-ant-..."
+```
+
+</StepCard>
+
+<StepCard step="3" title="첫 실행">
+
+프로젝트 폴더로 이동 후 실행:
+
+```bash
+cd my-project
+claude
+```
+
+</StepCard>
+
+<Callout type="tip" title="팁">
+API 키를 `.bashrc` 또는 `.zshrc`에 추가하면 매번 설정하지 않아도 됩니다.
+</Callout>
