@@ -40,6 +40,20 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 설치 섹션 */}
+      <section className="py-12 px-6 bg-gray-950 border-t border-b border-gray-800 -mx-6">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-xl font-semibold text-white mb-2">지금 바로 시작하기</h2>
+          <p className="text-gray-400 mb-6 text-sm">터미널에 아래 명령어를 붙여넣으세요</p>
+          <div className="relative bg-gray-900 rounded-lg border border-gray-700 px-6 py-4 text-left">
+            <code className="text-green-400 text-sm font-mono break-all">
+              curl -fsSL https://raw.githubusercontent.com/Mod41529/claude-code-guide/master/install.sh | bash
+            </code>
+          </div>
+          <p className="text-gray-500 text-xs mt-3">설치 후 Claude Code에서 /claude-study 를 입력하세요</p>
+        </div>
+      </section>
+
       {/* Feature cards */}
       <section className="grid gap-4 sm:grid-cols-3">
         {features.map((f, i) => (
