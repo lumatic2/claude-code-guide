@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Claude Code 가이드
 
-## Getting Started
+Claude Code 입문자를 위한 가이드 웹사이트 + 인터랙티브 학습 스킬.
 
-First, run the development server:
+**가이드 사이트**: https://claude-code-guide.vercel.app
+
+---
+
+## 빠른 시작
+
+Claude Code를 설치한 후, 터미널에서 실행하세요:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+curl -fsSL https://raw.githubusercontent.com/Mod41529/claude-code-guide/master/install.sh | bash
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+설치 완료 후 Claude Code를 열고:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+/claude-study
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+코딩을 몰라도 됩니다. 웹사이트, 소설, PDF 중 하나를 골라 직접 만들면서 Claude Code를 배웁니다.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 포함된 것
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 가이드 사이트 (`/app`, `/content`)
+- Claude Code 소개, 설치, 핵심 사용법, 고급 설정, 워크플로우, 치트시트
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 학습 스킬 (`/skill`)
+- `/claude-study` — 결과물을 만들며 배우는 입문 스킬
+  - 웹사이트 트랙 (Next.js + Vercel)
+  - 소설/에세이 트랙
+  - PDF 문서 트랙 (Typst)
 
-## Deploy on Vercel
+### 스타터 스킬 (`/starter-skills`)
+- `/writing` — 한국어 글쓰기
+- `/website` — 웹사이트 만들기
+- `/pdf` — PDF 문서 만들기
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 개발
+
+```bash
+pnpm install
+pnpm dev      # http://localhost:3000
+pnpm build    # 빌드 확인
+```
+
+---
+
+## 라이선스
+
+MIT
