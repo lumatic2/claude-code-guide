@@ -31,7 +31,7 @@ export default function RootLayout({
             <footer className="mx-auto w-full max-w-4xl border-t border-zinc-800 px-4 py-6 sm:px-8">
               <p className="text-xs text-zinc-500">
                 Claude Code Guide · 기준 버전: Claude Code 1.x (2026-03)
-                · <a href="https://github.com/Mod41529/claude-code-guide" className="inline-block min-h-[44px] leading-[44px] hover:text-zinc-300 transition-colors" target="_blank" rel="noopener noreferrer">GitHub</a>
+                · <a href="https://github.com/lumatic2/claude-code-guide" className="inline-block min-h-[44px] leading-[44px] hover:text-zinc-300 transition-colors" target="_blank" rel="noopener noreferrer">GitHub</a>
               </p>
             </footer>
           </main>

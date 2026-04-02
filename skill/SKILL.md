@@ -38,13 +38,13 @@ AskUserQuestion으로 딱 한 번 묻는다:
 
 MISSING이면 자동 설치 시도:
 
-    REPO="https://raw.githubusercontent.com/Mod41529/claude-code-guide/master"
+    REPO="https://raw.githubusercontent.com/lumatic2/claude-code-guide/master"
     mkdir -p ~/.claude/skills/{스킬명}
     curl -fsSL "$REPO/starter-skills/{스킬명}/SKILL.md" -o ~/.claude/skills/{스킬명}/SKILL.md
 
 실패 시:
 "스킬 자동 설치에 실패했습니다. 아래 명령어로 전체 설치하세요:
-curl -fsSL https://raw.githubusercontent.com/Mod41529/claude-code-guide/master/install.sh | bash"
+curl -fsSL https://raw.githubusercontent.com/lumatic2/claude-code-guide/master/install.sh | bash"
 
 ## Step 3: 만들기
 

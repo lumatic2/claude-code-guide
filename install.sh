@@ -1,10 +1,10 @@
 #!/bin/bash
 # Claude Code 스타터 팩 설치 스크립트
-# 사용법: curl -fsSL https://raw.githubusercontent.com/Mod41529/claude-code-guide/master/install.sh | bash
+# 사용법: curl -fsSL https://raw.githubusercontent.com/lumatic2/claude-code-guide/master/install.sh | bash
 
 set -e
 
-REPO="https://raw.githubusercontent.com/Mod41529/claude-code-guide/master"
+REPO="https://raw.githubusercontent.com/lumatic2/claude-code-guide/master"
 SKILLS_DIR="$HOME/.claude/skills"
 
 echo ""

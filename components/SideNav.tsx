@@ -11,7 +11,7 @@ const navItems = [
   { href: "/guide/basics", label: "기본 사용법" },
   { href: "/guide/advanced", label: "고급 설정" },
   { href: "/guide/workflows", label: "실전 워크플로우" },
-  { href: "/cheatsheet", label: "치트시트" },
+  { href: "https://lumatic2.github.io/claude-code-cheatsheet/", label: "치트시트 ↗", external: true },
 ];
 
 function isActive(pathname: string, href: string): boolean {
@@ -29,7 +29,17 @@ export default function SideNav() {
       <nav className="sticky top-0 z-40 border-b border-zinc-800/80 bg-zinc-950/95 backdrop-blur md:hidden">
         <div className="overflow-x-auto px-3 py-3">
           <div className="flex min-w-max gap-2">
-            {navItems.map((item) => (
+            {navItems.map((item) => item.external ? (
+              <a
+                key={item.href}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-md px-3 py-1.5 text-sm transition-colors text-zinc-300 hover:bg-zinc-800 hover:text-white"
+              >
+                {item.label}
+              </a>
+            ) : (
               <Link
                 key={item.href}
                 href={item.href}
@@ -57,17 +67,28 @@ export default function SideNav() {
         <ul className="space-y-1">
           {navItems.map((item) => (
             <li key={item.href}>
-              <Link
-                href={item.href}
-                className={cn(
-                  "block rounded-lg px-3 py-2 text-sm transition-colors",
-                  isActive(pathname, item.href)
-                    ? "bg-emerald-500/20 text-emerald-300"
-                    : "text-zinc-300 hover:bg-zinc-800 hover:text-white",
-                )}
-              >
-                {item.label}
-              </Link>
+              {item.external ? (
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block rounded-lg px-3 py-2 text-sm transition-colors text-zinc-300 hover:bg-zinc-800 hover:text-white"
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  href={item.href}
+                  className={cn(
+                    "block rounded-lg px-3 py-2 text-sm transition-colors",
+                    isActive(pathname, item.href)
+                      ? "bg-emerald-500/20 text-emerald-300"
+                      : "text-zinc-300 hover:bg-zinc-800 hover:text-white",
+                  )}
+                >
+                  {item.label}
+                </Link>
+              )}
             </li>
           ))}
         </ul>

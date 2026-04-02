@@ -47,7 +47,7 @@ export default function Home() {
           <p className="text-gray-400 mb-6 text-sm">터미널에 아래 명령어를 붙여넣으세요</p>
           <div className="relative bg-gray-900 rounded-lg border border-gray-700 px-6 py-4 text-left">
             <code className="text-green-400 text-sm font-mono break-all">
-              curl -fsSL https://raw.githubusercontent.com/Mod41529/claude-code-guide/master/install.sh | bash
+              curl -fsSL https://raw.githubusercontent.com/lumatic2/claude-code-guide/master/install.sh | bash
             </code>
           </div>
           <p className="text-gray-500 text-xs mt-3">설치 후 Claude Code에서 /claude-study 를 입력하세요</p>
