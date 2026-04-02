@@ -1,62 +1,52 @@
+"use client";
 import Link from "next/link";
-
-const features = [
-  {
-    title: "빠른 설치",
-    desc: "npm 한 줄로 설치 완료. API 키만 있으면 바로 시작할 수 있습니다.",
-    href: "/guide/setup",
-  },
-  {
-    title: "핵심 명령어",
-    desc: "자주 쓰는 슬래시 명령어와 프롬프트 패턴을 한눈에 정리했습니다.",
-    href: "/cheatsheet",
-  },
-  {
-    title: "실전 워크플로",
-    desc: "파일 생성, 버그 수정, 코드 리뷰까지 실제 예제로 익힙니다.",
-    href: "/guide/basics",
-  },
-];
+import TerminalDemo from "@/components/TerminalDemo";
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-16 py-12">
+    <div className="flex flex-col items-center gap-16 py-20 text-center">
+
       {/* Hero */}
-      <section className="flex flex-col gap-6">
-        <h1 className="text-4xl font-bold tracking-tight text-zinc-50 sm:text-5xl" style={{textWrap: "balance"}}>
-          Claude Code <span className="text-zinc-400">완벽 가이드</span>
-        </h1>
-        <p className="max-w-xl text-lg text-zinc-400 leading-relaxed">
-          AI 코딩 어시스턴트를 처음부터 실무까지.
-          설치부터 핵심 명령어, 실전 워크플로까지 한 번에 익히세요.
-        </p>
-        <div>
-          <Link
-            href="/guide/intro"
-            className="inline-flex items-center gap-2 rounded-full bg-zinc-50 px-6 py-3 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-200"
-          >
-            시작하기 →
-          </Link>
+      <section className="flex flex-col items-center gap-5">
+        <div
+          style={{
+            animation: "float 3.5s ease-in-out infinite, glowPulse 3.5s ease-in-out infinite",
+            display: "inline-block",
+            cursor: "pointer",
+            transition: "transform 0.2s ease",
+          }}
+          onMouseEnter={e => {
+            (e.currentTarget as HTMLElement).style.animationPlayState = "paused";
+            (e.currentTarget as HTMLElement).style.transform = "scale(1.15) translateY(-4px)";
+          }}
+          onMouseLeave={e => {
+            (e.currentTarget as HTMLElement).style.animationPlayState = "running";
+            (e.currentTarget as HTMLElement).style.transform = "";
+          }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/claude-icon.svg" alt="Claude Code" width={96} height={96} />
         </div>
+        <h1 className="text-5xl font-bold tracking-tight text-zinc-50 sm:text-6xl">
+          Claude Code
+        </h1>
+        <p className="max-w-lg text-lg text-zinc-400 leading-relaxed">
+          Claude Code는 터미널에서 대화하는 AI 에이전트입니다.<br />
+          글쓰기 · 디자인 · 음악 · 시스템 설계
+        </p>
+        <Link
+          href="/guide/intro"
+          className="mt-2 inline-flex items-center gap-2 rounded-full bg-zinc-50 px-7 py-3 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-200"
+        >
+          입문 가이드 시작하기 →
+        </Link>
       </section>
 
-      {/* Feature cards */}
-      <section className="grid gap-4 sm:grid-cols-3">
-        {features.map((f, i) => (
-          <Link
-            key={f.href}
-            href={f.href}
-            className={
-              i === 0
-                ? "rounded-xl border border-emerald-500/40 bg-emerald-500/10 p-6 transition hover:border-emerald-400/60 hover:bg-emerald-500/15"
-                : "rounded-xl border border-zinc-800 bg-zinc-900 p-6 transition hover:border-zinc-600 hover:bg-zinc-800"
-            }
-          >
-            <h2 className={`mb-2 text-base font-semibold ${i === 0 ? "text-emerald-100" : "text-zinc-50"}`}>{f.title}</h2>
-            <p className={`text-sm leading-relaxed ${i === 0 ? "text-emerald-200/70" : "text-zinc-400"}`}>{f.desc}</p>
-          </Link>
-        ))}
+      {/* Terminal Demo */}
+      <section className="w-full max-w-3xl">
+        <TerminalDemo />
       </section>
+
     </div>
   );
 }
