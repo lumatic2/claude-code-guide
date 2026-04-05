@@ -19,7 +19,7 @@ mkdir -p "$SKILLS_DIR"
 echo "📦 claude-study 설치 중..."
 mkdir -p "$SKILLS_DIR/claude-study/references"
 curl -fsSL "$REPO/skill/SKILL.md" -o "$SKILLS_DIR/claude-study/SKILL.md" 2>/dev/null && echo "  ✓ SKILL.md" || echo "  ⚠️  다운로드 실패"
-for ref in track-website track-writing track-pdf; do
+for ref in track-website track-writing track-pdf track-files; do
   curl -fsSL "$REPO/skill/references/$ref.md" -o "$SKILLS_DIR/claude-study/references/$ref.md" 2>/dev/null && echo "  ✓ references/$ref.md" || true
 done
 
