@@ -2,7 +2,7 @@
 
 Claude Code 입문자를 위한 가이드 웹사이트 + 인터랙티브 학습 스킬.
 
-**가이드 사이트**: https://claude-code-guide.vercel.app
+**가이드 사이트**: https://claude-code-guide-yusongs-projects-c6e6da7f.vercel.app
 
 ---
 

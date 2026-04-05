@@ -75,7 +75,7 @@ AskUserQuestion으로 시나리오 매칭 퀴즈를 낸다. 3개 시나리오를
 각 시나리오에 대해 왜 그 STEP인지 설명한다.
 
 마지막에 웹 가이드 링크를 안내한다:
-> 더 자세한 소개: https://claude-code-guide.vercel.app/guide/intro
+> 더 자세한 소개: https://claude-code-guide-yusongs-projects-c6e6da7f.vercel.app/guide/intro
 
 ---
 

@@ -98,7 +98,7 @@ jobs:
 - `secrets.ANTHROPIC_API_KEY` — GitHub Secrets에 저장한 API 키
 
 > 이건 개념만 이해하고 넘어갑니다. 실제 설정은 GitHub 레포가 필요해요.
-> 자세한 설정법: https://claude-code-guide.vercel.app/guide/workflows
+> 자세한 설정법: https://claude-code-guide-yusongs-projects-c6e6da7f.vercel.app/guide/workflows
 
 ---
 

@@ -64,7 +64,7 @@ curl -fsSL https://raw.githubusercontent.com/lumatic2/claude-code-guide/master/i
 
 마지막 안내:
 "오늘 Claude Code로 [결과물]을 만들었습니다!
-더 많은 활용법: https://claude-code-guide.vercel.app
+더 많은 활용법: https://claude-code-guide-yusongs-projects-c6e6da7f.vercel.app
 다음엔 /website, /writing, /pdf 로 바로 시작해보세요."
 
 ## 원칙
