@@ -231,24 +231,13 @@ export default function TerminalDemo() {
 
 function PortfolioGridPanel() {
   return (
-    <div className="absolute inset-0 bg-white overflow-hidden">
-      <iframe
-        src={PORTFOLIO_URL}
-        title="포트폴리오"
-        style={{
-          width: 1280,
-          height: 2400,
-          transform: 'translateY(-700px) scale(0.37)',
-          transformOrigin: 'top left',
-          pointerEvents: 'none',
-          border: 'none',
-        }}
-      />
+    <div className="absolute inset-0 overflow-hidden bg-white">
+      <img src="/portfolio-bento.png" alt="portfolio" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
     </div>
   )
 }
 
-function _PortfolioGridPanelStatic() {
+function _PortfolioGridPanelOld() {
   return (
     <div className="absolute inset-0 overflow-hidden" style={{ background: '#0a0a0a', fontFamily: 'system-ui, sans-serif', padding: 6 }}>
       <div style={{ display: 'grid', gridTemplateRows: '1fr 1fr auto', gap: 5, height: '100%' }}>
@@ -320,38 +309,13 @@ function _PortfolioGridPanelStatic() {
 }
 
 function DrawingPanel() {
+  const images = ['/drawing0.png', '/drawing1.png', '/drawing2.png', '/drawing3.png']
   return (
-    <div className="absolute inset-0 overflow-hidden" style={{ background: '#1a1a1a', fontFamily: 'system-ui, sans-serif' }}>
-      {/* Midjourney-style header */}
-      <div style={{ background: '#111', borderBottom: '1px solid #2a2a2a', padding: '6px 10px', display: 'flex', alignItems: 'center', gap: 6 }}>
-        <div style={{ width: 16, height: 16, borderRadius: 3, background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <span style={{ fontSize: 9, fontWeight: 900, color: '#000' }}>M</span>
-        </div>
-        <span style={{ fontSize: 10, color: '#888' }}>Midjourney</span>
-        <span style={{ marginLeft: 'auto', fontSize: 9, color: '#555' }}>Imagine • 완료</span>
-      </div>
-      {/* Main image */}
-      <div style={{ flex: 1, padding: 8, display: 'flex', flexDirection: 'column', gap: 6 }}>
-        <div style={{ background: '#2a2a2a', borderRadius: 6, overflow: 'hidden', aspectRatio: '4/3' }}>
-          <img
-            src={`${PORTFOLIO_URL}/images/thumbnails/v1.jpg`}
-            alt="generated"
-            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-            onError={(e) => {
-              (e.target as HTMLImageElement).style.display = 'none'
-            }}
-          />
-        </div>
-        {/* Prompt text */}
-        <div style={{ fontSize: 9, color: '#666', lineHeight: 1.5, padding: '0 2px' }}>
-          A group of tiny people harvesting giant mushrooms from a mossy forest floor. Fantasy atmosphere, warm dreamy lighting...
-        </div>
-        {/* Action buttons */}
-        <div style={{ display: 'flex', gap: 4 }}>
-          {['Vary', 'Upscale', 'Edit'].map(btn => (
-            <div key={btn} style={{ flex: 1, background: '#2a2a2a', borderRadius: 4, padding: '3px 0', textAlign: 'center', fontSize: 9, color: '#aaa' }}>{btn}</div>
-          ))}
-        </div>
+    <div className="absolute inset-0 overflow-hidden" style={{ background: '#111' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr', gap: 2, height: '100%' }}>
+        {images.map((src, i) => (
+          <img key={i} src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+        ))}
       </div>
     </div>
   )
