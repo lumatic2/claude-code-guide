@@ -220,9 +220,9 @@ export default function TerminalDemo() {
 
           {/* Content area */}
           <div className="relative flex-1 overflow-hidden">
-            {sceneIndex === 0 && <IframePanel src={PORTFOLIO_URL} title="포트폴리오" />}
+            {sceneIndex === 0 && <PortfolioGridPanel />}
             {sceneIndex === 1 && <WritingPanel />}
-            {sceneIndex === 2 && <IframePanel src={DESIGN_URL} title="디자인 포트폴리오" />}
+            {sceneIndex === 2 && <DrawingPanel />}
           </div>
         </div>
       </div>
@@ -230,21 +230,134 @@ export default function TerminalDemo() {
   )
 }
 
-function IframePanel({ src, title }: { src: string; title: string }) {
+function PortfolioGridPanel() {
   return (
-    <div className="absolute inset-0 bg-white overflow-hidden">
-      <iframe
-        src={src}
-        title={title}
-        style={{
-          width: 1280,
-          height: 900,
-          transform: 'scale(0.37)',
-          transformOrigin: 'top left',
-          pointerEvents: 'none',
-          border: 'none',
-        }}
-      />
+    <div className="absolute inset-0 overflow-hidden" style={{ background: '#0a0a0a', fontFamily: 'system-ui, sans-serif', padding: 6 }}>
+      <div style={{ display: 'grid', gridTemplateRows: '1fr 1fr auto', gap: 5, height: '100%' }}>
+        {/* Row 1: VIDEO + MUSIC */}
+        <div style={{ display: 'grid', gridTemplateColumns: '55% 45%', gap: 5 }}>
+          <div style={{ background: '#111', border: '1px solid #222', borderRadius: 6, padding: '8px 10px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+            <span style={{ fontSize: 9, color: '#f97316', fontWeight: 700, letterSpacing: 1 }}>VIDEO</span>
+            <span style={{ fontSize: 13, color: '#fff', fontWeight: 700, marginTop: 2 }}>영상</span>
+            <span style={{ fontSize: 9, color: '#666', marginTop: 2, lineHeight: 1.4 }}>Motion graphics, cinematic edits, and generative video work.</span>
+          </div>
+          <div style={{ background: '#111', border: '1px solid #222', borderRadius: 6, padding: '8px 10px' }}>
+            <span style={{ fontSize: 9, color: '#f97316', fontWeight: 700, letterSpacing: 1 }}>MUSIC</span>
+            <div style={{ marginTop: 8, background: '#1a1a1a', borderRadius: 4, padding: '6px 8px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <div style={{ width: 18, height: 18, borderRadius: '50%', background: '#222', border: '1px solid #333', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span style={{ fontSize: 7, color: '#ccc' }}>▶</span>
+                </div>
+                <div>
+                  <div style={{ fontSize: 9, color: '#ddd', fontWeight: 600 }}>CAFE SESSION</div>
+                  <div style={{ fontSize: 8, color: '#555' }}>카페 세션</div>
+                </div>
+              </div>
+              <div style={{ marginTop: 5, height: 2, background: '#222', borderRadius: 1 }}>
+                <div style={{ width: '35%', height: '100%', background: '#f97316', borderRadius: 1 }} />
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Row 2: DESIGN + DEVELOPMENT */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 5 }}>
+          <div style={{ background: '#141414', border: '1px solid #222', borderRadius: 6, padding: '8px 10px' }}>
+            <span style={{ fontSize: 9, color: '#f97316', fontWeight: 700, letterSpacing: 1 }}>DESIGN</span>
+            <div style={{ marginTop: 6, fontSize: 20, textAlign: 'center' }}>🐱</div>
+            <span style={{ fontSize: 9, color: '#555', marginTop: 4, display: 'block', lineHeight: 1.4 }}>Visual identity, editorial layout, and interface design.</span>
+          </div>
+          <div style={{ background: '#111', border: '1px solid #222', borderRadius: 6, padding: '8px 10px' }}>
+            <span style={{ fontSize: 9, color: '#f97316', fontWeight: 700, letterSpacing: 1 }}>DEVELOPMENT</span>
+            <div style={{ marginTop: 6, display: 'flex', justifyContent: 'center', gap: 8 }}>
+              <div style={{ width: 22, height: 22, borderRadius: '50%', background: '#f97316', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <span style={{ fontSize: 9, color: '#fff', fontWeight: 700 }}>A</span>
+              </div>
+              <div style={{ width: 22, height: 22, borderRadius: '50%', background: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <span style={{ fontSize: 9, color: '#fff' }}>+</span>
+              </div>
+            </div>
+            <span style={{ fontSize: 9, color: '#555', marginTop: 4, display: 'block', lineHeight: 1.4 }}>Web applications, automation tools, and multi-agent systems.</span>
+          </div>
+        </div>
+        {/* Row 3: BUSINESS */}
+        <div style={{ background: '#f8f5f0', border: '1px solid #e8e0d0', borderRadius: 6, padding: '6px 10px' }}>
+          <span style={{ fontSize: 9, color: '#f97316', fontWeight: 700, letterSpacing: 1 }}>BUSINESS</span>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 4, marginTop: 4 }}>
+            {[
+              { icon: '◎', label: '전략' },
+              { icon: '↑', label: '재무' },
+              { icon: '✉', label: '마케팅' },
+              { icon: '⊞', label: '생산' },
+            ].map(({ icon, label }) => (
+              <div key={label} style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: 14, color: '#f97316' }}>{icon}</div>
+                <div style={{ fontSize: 9, color: '#666', marginTop: 2 }}>{label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function DrawingPanel() {
+  const logos = [
+    {
+      label: '앱 로고',
+      svg: (
+        <svg width="40" height="40" viewBox="0 0 40 40">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#a78bfa" />
+              <stop offset="100%" stopColor="#7c3aed" />
+            </linearGradient>
+          </defs>
+          <polygon points="20,4 36,34 4,34" fill="url(#g1)" />
+          <text x="20" y="28" textAnchor="middle" fontSize="13" fontWeight="bold" fill="white">A</text>
+        </svg>
+      ),
+    },
+    {
+      label: '브랜드',
+      svg: (
+        <svg width="40" height="40" viewBox="0 0 40 40">
+          <path d="M4 28 Q10 12 20 20 Q30 28 36 12" stroke="#06b6d4" strokeWidth="3.5" fill="none" strokeLinecap="round" />
+          <path d="M4 34 Q10 18 20 26 Q30 34 36 18" stroke="#0891b2" strokeWidth="2" fill="none" strokeLinecap="round" opacity="0.5" />
+        </svg>
+      ),
+    },
+    {
+      label: '아이콘',
+      svg: (
+        <svg width="40" height="40" viewBox="0 0 40 40">
+          <circle cx="20" cy="20" r="15" stroke="#f59e0b" strokeWidth="3" fill="none" />
+          <circle cx="20" cy="20" r="5" fill="#f59e0b" />
+          <circle cx="20" cy="20" r="9" stroke="#fbbf24" strokeWidth="1" fill="none" opacity="0.5" />
+        </svg>
+      ),
+    },
+    {
+      label: '심볼',
+      svg: (
+        <svg width="40" height="40" viewBox="0 0 40 40">
+          <polygon points="20,6 26,17 38,17 29,25 32,36 20,29 8,36 11,25 2,17 14,17" fill="none" stroke="#10b981" strokeWidth="2.5" strokeLinejoin="round" />
+          <polygon points="20,12 24,19 32,19 26,24 28,31 20,27 12,31 14,24 8,19 16,19" fill="#10b981" opacity="0.25" />
+        </svg>
+      ),
+    },
+  ]
+
+  return (
+    <div className="absolute inset-0 overflow-hidden" style={{ background: '#0d1117', padding: 10 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, height: '100%' }}>
+        {logos.map(({ label, svg }) => (
+          <div key={label} style={{ background: '#fff', borderRadius: 8, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 6, padding: 8 }}>
+            {svg}
+            <span style={{ fontSize: 10, color: '#555', fontWeight: 600 }}>{label}</span>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
