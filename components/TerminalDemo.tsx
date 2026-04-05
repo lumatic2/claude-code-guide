@@ -237,8 +237,8 @@ function PortfolioGridPanel() {
         title="포트폴리오"
         style={{
           width: 1280,
-          height: 1400,
-          transform: 'scale(0.37) translateY(-540px)',
+          height: 2400,
+          transform: 'translateY(-700px) scale(0.37)',
           transformOrigin: 'top left',
           pointerEvents: 'none',
           border: 'none',
