@@ -2,8 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react'
 
-const PORTFOLIO_URL = 'https://luma3-portfolio-qeh16d1v7-yusongs-projects-c6e6da7f.vercel.app'
-const DESIGN_URL = `${PORTFOLIO_URL}/work/design`
+const PORTFOLIO_URL = 'https://luma3-portfolio.vercel.app'
 
 const TYPE_INTERVAL = 55
 const LINE_INTERVAL = 360
@@ -41,14 +40,14 @@ const SCENES: SceneData[] = [
     ],
   },
   {
-    userText: '/drawing 앱 로고 만들어줘',
+    userText: '/drawing 그림 그려줘',
     lines: [
       '◆ drawing 스킬 실행 중...',
-      '  스타일 레퍼런스 분석 중...',
+      '  주제 분석 중...',
       '  Midjourney 프롬프트 생성...',
-      '  이미지 4종 생성 중...',
-      '✓ 로고 시안 4개 완성',
-      '✓ design/ 폴더에 저장',
+      '  이미지 생성 중...',
+      '✓ 이미지 4종 완성',
+      '✓ drawing/ 폴더에 저장',
     ],
   },
 ]
@@ -232,6 +231,25 @@ export default function TerminalDemo() {
 
 function PortfolioGridPanel() {
   return (
+    <div className="absolute inset-0 bg-white overflow-hidden">
+      <iframe
+        src={PORTFOLIO_URL}
+        title="포트폴리오"
+        style={{
+          width: 1280,
+          height: 1400,
+          transform: 'scale(0.37) translateY(-540px)',
+          transformOrigin: 'top left',
+          pointerEvents: 'none',
+          border: 'none',
+        }}
+      />
+    </div>
+  )
+}
+
+function _PortfolioGridPanelStatic() {
+  return (
     <div className="absolute inset-0 overflow-hidden" style={{ background: '#0a0a0a', fontFamily: 'system-ui, sans-serif', padding: 6 }}>
       <div style={{ display: 'grid', gridTemplateRows: '1fr 1fr auto', gap: 5, height: '100%' }}>
         {/* Row 1: VIDEO + MUSIC */}
@@ -302,61 +320,38 @@ function PortfolioGridPanel() {
 }
 
 function DrawingPanel() {
-  const logos = [
-    {
-      label: '앱 로고',
-      svg: (
-        <svg width="40" height="40" viewBox="0 0 40 40">
-          <defs>
-            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#a78bfa" />
-              <stop offset="100%" stopColor="#7c3aed" />
-            </linearGradient>
-          </defs>
-          <polygon points="20,4 36,34 4,34" fill="url(#g1)" />
-          <text x="20" y="28" textAnchor="middle" fontSize="13" fontWeight="bold" fill="white">A</text>
-        </svg>
-      ),
-    },
-    {
-      label: '브랜드',
-      svg: (
-        <svg width="40" height="40" viewBox="0 0 40 40">
-          <path d="M4 28 Q10 12 20 20 Q30 28 36 12" stroke="#06b6d4" strokeWidth="3.5" fill="none" strokeLinecap="round" />
-          <path d="M4 34 Q10 18 20 26 Q30 34 36 18" stroke="#0891b2" strokeWidth="2" fill="none" strokeLinecap="round" opacity="0.5" />
-        </svg>
-      ),
-    },
-    {
-      label: '아이콘',
-      svg: (
-        <svg width="40" height="40" viewBox="0 0 40 40">
-          <circle cx="20" cy="20" r="15" stroke="#f59e0b" strokeWidth="3" fill="none" />
-          <circle cx="20" cy="20" r="5" fill="#f59e0b" />
-          <circle cx="20" cy="20" r="9" stroke="#fbbf24" strokeWidth="1" fill="none" opacity="0.5" />
-        </svg>
-      ),
-    },
-    {
-      label: '심볼',
-      svg: (
-        <svg width="40" height="40" viewBox="0 0 40 40">
-          <polygon points="20,6 26,17 38,17 29,25 32,36 20,29 8,36 11,25 2,17 14,17" fill="none" stroke="#10b981" strokeWidth="2.5" strokeLinejoin="round" />
-          <polygon points="20,12 24,19 32,19 26,24 28,31 20,27 12,31 14,24 8,19 16,19" fill="#10b981" opacity="0.25" />
-        </svg>
-      ),
-    },
-  ]
-
   return (
-    <div className="absolute inset-0 overflow-hidden" style={{ background: '#0d1117', padding: 10 }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, height: '100%' }}>
-        {logos.map(({ label, svg }) => (
-          <div key={label} style={{ background: '#fff', borderRadius: 8, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 6, padding: 8 }}>
-            {svg}
-            <span style={{ fontSize: 10, color: '#555', fontWeight: 600 }}>{label}</span>
-          </div>
-        ))}
+    <div className="absolute inset-0 overflow-hidden" style={{ background: '#1a1a1a', fontFamily: 'system-ui, sans-serif' }}>
+      {/* Midjourney-style header */}
+      <div style={{ background: '#111', borderBottom: '1px solid #2a2a2a', padding: '6px 10px', display: 'flex', alignItems: 'center', gap: 6 }}>
+        <div style={{ width: 16, height: 16, borderRadius: 3, background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <span style={{ fontSize: 9, fontWeight: 900, color: '#000' }}>M</span>
+        </div>
+        <span style={{ fontSize: 10, color: '#888' }}>Midjourney</span>
+        <span style={{ marginLeft: 'auto', fontSize: 9, color: '#555' }}>Imagine • 완료</span>
+      </div>
+      {/* Main image */}
+      <div style={{ flex: 1, padding: 8, display: 'flex', flexDirection: 'column', gap: 6 }}>
+        <div style={{ background: '#2a2a2a', borderRadius: 6, overflow: 'hidden', aspectRatio: '4/3' }}>
+          <img
+            src={`${PORTFOLIO_URL}/images/thumbnails/v1.jpg`}
+            alt="generated"
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            onError={(e) => {
+              (e.target as HTMLImageElement).style.display = 'none'
+            }}
+          />
+        </div>
+        {/* Prompt text */}
+        <div style={{ fontSize: 9, color: '#666', lineHeight: 1.5, padding: '0 2px' }}>
+          A group of tiny people harvesting giant mushrooms from a mossy forest floor. Fantasy atmosphere, warm dreamy lighting...
+        </div>
+        {/* Action buttons */}
+        <div style={{ display: 'flex', gap: 4 }}>
+          {['Vary', 'Upscale', 'Edit'].map(btn => (
+            <div key={btn} style={{ flex: 1, background: '#2a2a2a', borderRadius: 4, padding: '3px 0', textAlign: 'center', fontSize: 9, color: '#aaa' }}>{btn}</div>
+          ))}
+        </div>
       </div>
     </div>
   )
