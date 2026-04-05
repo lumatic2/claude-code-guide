@@ -1,10 +1,12 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { readFileSync } from "fs";
 import path from "path";
+import remarkGfm from "remark-gfm";
 import Callout from "@/components/Callout";
+import { baseComponents } from "@/components/MdxComponents";
 import PrintButton from "@/components/PrintButton";
 
-const components = { Callout };
+const components = { ...baseComponents, Callout };
 
 export default function CheatsheetPage() {
   const filePath = path.join(process.cwd(), "content", "cheatsheet.mdx");
@@ -15,7 +17,11 @@ export default function CheatsheetPage() {
         <PrintButton />
       </div>
       <article className="prose prose-invert max-w-none prose-table:overflow-x-auto">
-        <MDXRemote source={source} components={components} />
+        <MDXRemote
+          source={source}
+          components={components}
+          options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+        />
       </article>
     </div>
   );
