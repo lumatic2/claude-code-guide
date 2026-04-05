@@ -4,7 +4,7 @@ import TerminalDemo from "@/components/TerminalDemo";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center gap-16 py-20 text-center">
+    <div className="flex flex-col items-center gap-10 py-12 sm:gap-16 sm:py-20 text-center">
 
       {/* Hero */}
       <section className="flex flex-col items-center gap-5">
@@ -27,12 +27,12 @@ export default function Home() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/claude-icon.svg" alt="Claude Code" width={96} height={96} />
         </div>
-        <h1 className="text-5xl font-bold tracking-tight text-zinc-50 sm:text-6xl">
+        <h1 className="text-4xl font-bold tracking-tight text-zinc-50 sm:text-5xl lg:text-6xl">
           Claude Code
         </h1>
-        <p className="max-w-lg text-lg text-zinc-400 leading-relaxed">
-          Claude Code는 터미널에서 대화하는 AI 에이전트입니다.<br />
-          글쓰기 · 디자인 · 음악 · 시스템 설계
+        <p className="max-w-lg text-base sm:text-lg text-zinc-400 leading-relaxed px-4 sm:px-0">
+          Claude Code는 터미널에서 대화하는 AI 에이전트입니다.<br className="hidden sm:block" />
+          <span className="sm:hidden"> </span>글쓰기 · 디자인 · 음악 · 시스템 설계
         </p>
         <Link
           href="/guide/intro"

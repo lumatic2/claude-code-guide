@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 
 const PORTFOLIO_URL = 'https://luma3-portfolio-qeh16d1v7-yusongs-projects-c6e6da7f.vercel.app'
 const DESIGN_URL = `${PORTFOLIO_URL}/work/design`
@@ -66,6 +66,14 @@ export default function TerminalDemo() {
   const [showCursor, setShowCursor] = useState(true)
   const [resultOpen, setResultOpen] = useState(false)
   const [resultVisible, setResultVisible] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   useEffect(() => {
     let cancelled = false
@@ -73,40 +81,55 @@ export default function TerminalDemo() {
 
     const runScene = (idx: number) => {
       if (cancelled) return
-      const scene = SCENES[idx % SCENES.length]
+      const sceneIdx = idx % SCENES.length
+      const scene = SCENES[sceneIdx]
+      const FADE_OUT = 420 // opacity transition 완료 대기
 
-      setSceneIndex(idx % SCENES.length)
-      setTypedText('')
-      setVisibleLineCount(0)
-      setResultOpen(false)
+      // 1. 결과 패널 페이드 아웃 (첫 씬은 즉시)
       setResultVisible(false)
 
-      for (let i = 0; i < scene.userText.length; i++) {
-        timeouts.push(setTimeout(() => {
-          if (!cancelled) setTypedText(scene.userText.slice(0, i + 1))
-        }, 500 + TYPE_INTERVAL * (i + 1)))
-      }
-
-      const typingDone = 500 + scene.userText.length * TYPE_INTERVAL
-
-      scene.lines.forEach((_, i) => {
-        timeouts.push(setTimeout(() => {
-          if (!cancelled) setVisibleLineCount(i + 1)
-        }, typingDone + LINE_INTERVAL * (i + 1)))
-      })
-
-      const streamingDone = typingDone + scene.lines.length * LINE_INTERVAL + STREAM_HOLD
-
+      // 2. 페이드 완료 후 콘텐츠 교체 및 씬 시작
       timeouts.push(setTimeout(() => {
-        if (!cancelled) {
-          setResultOpen(true)
-          setTimeout(() => { if (!cancelled) setResultVisible(true) }, 180)
+        if (cancelled) return
+        setResultOpen(false)
+        setSceneIndex(sceneIdx)
+        setTypedText('')
+        setVisibleLineCount(0)
+
+        // 3. 타이핑
+        for (let i = 0; i < scene.userText.length; i++) {
+          timeouts.push(setTimeout(() => {
+            if (!cancelled) setTypedText(scene.userText.slice(0, i + 1))
+          }, 300 + TYPE_INTERVAL * (i + 1)))
         }
-      }, streamingDone))
 
-      timeouts.push(setTimeout(() => {
-        if (!cancelled) runScene(idx + 1)
-      }, streamingDone + RESULT_HOLD))
+        const typingDone = 300 + scene.userText.length * TYPE_INTERVAL
+
+        // 4. 응답 스트리밍
+        scene.lines.forEach((_, i) => {
+          timeouts.push(setTimeout(() => {
+            if (!cancelled) setVisibleLineCount(i + 1)
+          }, typingDone + LINE_INTERVAL * (i + 1)))
+        })
+
+        const streamingDone = typingDone + scene.lines.length * LINE_INTERVAL + STREAM_HOLD
+
+        // 5. 결과 패널 오픈 (모바일은 스킵)
+        if (!isMobile) {
+          timeouts.push(setTimeout(() => {
+            if (!cancelled) {
+              setResultOpen(true)
+              setTimeout(() => { if (!cancelled) setResultVisible(true) }, 180)
+            }
+          }, streamingDone))
+        }
+
+        // 6. 다음 씬 예약
+        timeouts.push(setTimeout(() => {
+          if (!cancelled) runScene(idx + 1)
+        }, streamingDone + RESULT_HOLD))
+
+      }, idx === 0 ? 0 : FADE_OUT))
     }
 
     const cursorTimer = setInterval(() => {
@@ -129,14 +152,14 @@ export default function TerminalDemo() {
   return (
     <div
       className="w-full overflow-hidden rounded-xl border border-white/10 shadow-2xl"
-      style={{ background: '#0d1117', fontFamily: 'Cascadia Code, Consolas, monospace', height: DEMO_HEIGHT }}
+      style={{ background: '#0d1117', fontFamily: 'Cascadia Code, Consolas, monospace', height: isMobile ? 280 : DEMO_HEIGHT }}
     >
       <div
         style={{
           display: 'grid',
           gridTemplateColumns: resultOpen ? '42% 58%' : '100% 0%',
           transition: 'grid-template-columns 0.55s cubic-bezier(0.4,0,0.2,1)',
-          height: DEMO_HEIGHT,
+          height: isMobile ? 280 : DEMO_HEIGHT,
           overflow: 'hidden',
         }}
       >
