@@ -88,18 +88,7 @@ AskUserQuestion:
 | PDF | references/track-pdf.md |
 | 파일 정리 | references/track-files.md |
 
-### B-2. 스킬 확인 & 설치
-필요한 스킬 확인:
-
-    ls ~/.claude/skills/{스킬명}/SKILL.md 2>/dev/null && echo "OK" || echo "MISSING"
-
-MISSING이면 자동 설치:
-
-    REPO="https://raw.githubusercontent.com/lumatic2/claude-code-guide/master"
-    mkdir -p ~/.claude/skills/{스킬명}
-    curl -fsSL "$REPO/starter-skills/{스킬명}/SKILL.md" -o ~/.claude/skills/{스킬명}/SKILL.md
-
-### B-3. 만들기 & 결과 확인
+### B-2. 만들기 & 결과 확인
 레퍼런스 파일 지침대로 `~/projects/` 아래에 프로젝트를 생성한다.
 결과물 확인 후 수정 방법 안내.
 
@@ -115,7 +104,16 @@ AskUserQuestion:
 - C) 자동화 / 파일 처리
 - D) 스킬 직접 실행 — /writing, /drawing 등 입력
 
-C-D 선택 시: 사용 가능한 스킬 목록을 출력하고 종료.
+C-D 선택 시: 아래 스킬 목록을 출력하고 종료.
+```
+사용 가능한 스킬:
+/drawing  — AI 이미지 생성
+/writing  — 글쓰기 세션
+/music    — 음악 프롬프트 생성
+/creative — 크리에이티브 허브 (그림·글·음악 통합)
+
+입력창에 그대로 입력하면 시작됩니다.
+```
 
 나머지는 분기 B와 동일하되 설명 생략, 바로 실행.
 
