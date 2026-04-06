@@ -10,71 +10,85 @@ AskUserQuestion으로 한 번에 물어본다:
 - 원하는 분위기: 미니멀 / 따뜻한 / 전문적 / 개성있는
 - 넣고 싶은 내용: 소개글 / 연락처 / 작업물 / 블로그
 
-## 2단계: 환경 확인
-
-아래를 순서대로 확인한다.
-
-Node.js 확인:
-
-    node --version
-
-없으면: "Node.js가 필요해요. https://nodejs.org 에서 LTS 버전을 설치하고 돌아오세요!"
-설치 완료를 확인한 후 진행.
-
-pnpm 확인:
-
-    pnpm --version
-
-없으면:
-
-    npm install -g pnpm
-
-## 3단계: 프로젝트 생성
+## 2단계: 폴더 생성
 
     mkdir -p ~/projects/{이름}-site
-    cd ~/projects/{이름}-site
-    pnpm create next-app . --typescript --tailwind --app --no-eslint --yes
 
-"파일들을 만들고 있어요... 1~2분 걸립니다" 안내.
+> Claude가 폴더를 만들었어요. 앞으로 이 안에 웹사이트 파일들이 생겨요.
 
-## 4단계: 페이지 작성
+## 3단계: HTML 파일 한 장으로 완성
 
-app/page.tsx 를 수집한 정보로 채운다.
+~/projects/{이름}-site/index.html 을 작성한다.
 
 반드시 포함:
 - 한국어 Pretendard 폰트 (CDN: https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css)
 - 이름/닉네임 크게 표시
 - 한 줄 소개
 - 선택한 섹션들
-- 모바일 반응형 (Tailwind 반응형 클래스 사용)
+- 모바일 반응형 (CSS media query 또는 flexbox)
+- 인라인 CSS로 전부 해결 (파일 하나로 완결)
 
 디자인은 선택한 분위기에 맞게 색상/폰트 크기 조정.
 
-## 5단계: 미리보기
+> Claude가 파일을 직접 작성했어요. 코드를 몰라도 "파란색으로 바꿔줘", "연락처 추가해줘"라고 말하면 Claude가 파일을 열어서 바꿔줍니다.
 
-    cd ~/projects/{이름}-site && pnpm dev
+## 4단계: 미리보기
 
-"브라우저에서 http://localhost:3000 을 열어보세요!
+완성 후 사용자에게 안내:
+
+"파일이 완성됐어요!
+파인더(Mac) 또는 파일 탐색기(Windows)에서 index.html 파일을 찾아 더블클릭하면 브라우저에서 바로 열려요.
+
 마음에 드시나요? 색상, 글자, 내용 중 바꾸고 싶은 게 있으면 말씀해주세요."
 
-## 6단계: 배포 (선택)
+수정 요청이 오면 해당 부분만 찾아서 바꾼다.
 
-AskUserQuestion: "인터넷에 올려서 링크를 받고 싶으신가요?"
+## 5단계: 배포 (선택)
+
+AskUserQuestion: "인터넷에 올려서 링크를 받고 싶으신가요? (무료예요)"
+
+Yes인 경우 — Netlify Drop 안내:
+
+"파일 하나로 바로 배포할 수 있어요:
+1. https://app.netlify.com/drop 에 접속
+2. index.html 파일을 드래그앤드롭
+3. 링크가 생겨요!
+
+(계정 없어도 됩니다. 링크는 24시간 유지, 계정 만들면 영구 유지)"
+
+> 내 컴퓨터에만 있던 파일이 인터넷에 올라가서 링크가 생기는 거예요. 코딩 지식 없이도 전 세계에 공개할 수 있어요.
+
+No인 경우: "나중에 올리고 싶으면 https://app.netlify.com/drop 에 파일을 끌어다 놓으면 돼요."
+
+## 6단계: 업그레이드 (선택)
+
+AskUserQuestion: "더 고급스러운 기능(블로그, 다크모드, 애니메이션)도 원하시나요?"
 
 Yes인 경우:
 
-Vercel CLI 확인:
+"좋아요! 지금 만든 HTML 파일에 바로 추가할 수 있어요. 어떤 기능을 먼저 넣어볼까요?"
 
-    vercel --version
+AskUserQuestion:
+- A) 다크모드 토글
+- B) 페이드인 애니메이션
+- C) 새 섹션 추가 (작업물, 연락처 등)
 
-없으면:
+선택에 맞게 기존 HTML/CSS 파일을 수정한다. 새 도구 설치 없이 진행.
 
-    npm install -g vercel
+---
 
-배포:
+## 다음에 해볼 것
 
-    cd ~/projects/{이름}-site && vercel --yes
+웹사이트를 완성했어요! 더 해보고 싶다면:
 
-완료 후 URL 알려주기: "🎉 배포 완료! 주소: https://..."
+**바로 이어서**
+- "배경색을 완전히 다르게 바꿔줘" → Claude가 파일을 열어 수정해줍니다
+- "소개글을 더 인상적으로 다시 써줘" → 글쓰기도 Claude가 해요
 
-No인 경우: "나중에 올리고 싶으면 터미널에서 vercel 을 입력하세요."
+**다른 트랙 도전**
+- PDF 트랙: 이 포트폴리오를 PDF 이력서로도 만들어보기
+- 글쓰기 트랙: 웹사이트에 올릴 소개글 다듬기
+
+**Claude Code 더 알아보기**
+- `/help` 입력 → Claude Code의 모든 기능 보기
+- https://claude-code-guide-yusongs-projects-c6e6da7f.vercel.app → 개념 정리 가이드
