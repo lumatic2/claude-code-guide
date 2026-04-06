@@ -232,7 +232,18 @@ export default function TerminalDemo() {
 function PortfolioGridPanel() {
   return (
     <div className="absolute inset-0 overflow-hidden bg-white">
-      <img src="/portfolio-bento.png" alt="portfolio" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
+      <iframe
+        src="https://luma3-portfolio.vercel.app"
+        style={{
+          width: '272%',
+          height: '272%',
+          border: 'none',
+          transform: 'scale(0.368)',
+          transformOrigin: 'top left',
+          pointerEvents: 'auto',
+        }}
+        scrolling="yes"
+      />
     </div>
   )
 }
@@ -311,10 +322,10 @@ function _PortfolioGridPanelOld() {
 function DrawingPanel() {
   const images = ['/drawing0.png', '/drawing1.png', '/drawing2.png', '/drawing3.png']
   return (
-    <div className="absolute inset-0 overflow-hidden" style={{ background: '#111' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr', gap: 2, height: '100%' }}>
+    <div className="absolute inset-0 overflow-y-auto" style={{ background: '#111' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
         {images.map((src, i) => (
-          <img key={i} src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          <img key={i} src={src} alt="" style={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover', display: 'block' }} />
         ))}
       </div>
     </div>
