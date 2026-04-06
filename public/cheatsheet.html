@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claude Code 치트시트 — Windows</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --surface2: #21262d;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --green: #3fb950;
+      --yellow: #d29922;
+      --red: #f85149;
+      --orange: #d18616;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header h1 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    header h1 span { color: var(--accent); }
+
+    header .meta {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .print-btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .print-btn:hover { background: #79c0ff; }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .card.wide { grid-column: span 2; }
+    .card.full { grid-column: span 3; }
+
+    .card-title {
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      padding: 8px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    tr + tr { border-top: 1px solid var(--border); }
+
+    td {
+      padding: 6px 12px;
+      vertical-align: middle;
+    }
+
+    td:first-child {
+      width: 50%;
+      white-space: nowrap;
+    }
+
+    td:last-child {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    kbd {
+      display: inline-block;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-family: 'Cascadia Code', 'Consolas', monospace;
+      font-size: 11px;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      border-radius: 4px;
+      padding: 1px 5px;
+      margin-left: 4px;
+      vertical-align: middle;
+    }
+    .badge-warn { background: #3d2f00; color: var(--yellow); border: 1px solid #7d5a00; }
+    .badge-win  { background: #0e2a47; color: var(--accent); border: 1px solid #1f4e8c; }
+
+    .callout {
+      grid-column: span 3;
+      background: #2a1f00;
+      border: 1px solid #7d5a00;
+      border-radius: 8px;
+      padding: 12px 16px;
+    }
+
+    .callout-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--yellow);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .callout ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px 20px;
+    }
+
+    .callout ul li {
+      font-size: 12px;
+      color: #c9a227;
+      padding: 2px 0;
+    }
+
+    .callout ul li::before { content: '⚠ '; }
+
+    .prefix-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .prefix-item {
+      padding: 10px 12px;
+      border-right: 1px solid var(--border);
+      text-align: center;
+    }
+    .prefix-item:last-child { border-right: none; }
+
+    .prefix-char {
+      font-size: 22px;
+      font-family: 'Cascadia Code', 'Consolas', monospace;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .prefix-desc {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .mode-cycle {
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      flex-wrap: wrap;
+    }
+
+    .mode-bubble {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 11px;
+      color: var(--text);
+    }
+    .mode-bubble.active { border-color: var(--green); color: var(--green); }
+
+    .arrow { color: var(--muted); }
+
+    .path-list { padding: 8px 12px; }
+    .path-item {
+      padding: 4px 0;
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+      border-bottom: 1px solid var(--border);
+    }
+    .path-item:last-child { border-bottom: none; }
+    .path-label { color: var(--muted); font-size: 11px; min-width: 70px; }
+    code {
+      font-family: 'Cascadia Code', 'Consolas', monospace;
+      font-size: 11px;
+      color: var(--accent);
+    }
+
+    .slash-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .slash-item {
+      padding: 6px 10px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .slash-item:nth-child(4n) { border-right: none; }
+    .slash-item:nth-last-child(-n+4) { border-bottom: none; }
+    .slash-cmd { font-family: 'Cascadia Code', 'Consolas', monospace; font-size: 12px; color: var(--green); }
+    .slash-desc { font-size: 11px; color: var(--muted); margin-top: 1px; }
+
+    footer {
+      text-align: center;
+      padding: 16px;
+      font-size: 11px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ─── Table hover ─── */
+    tbody tr:hover { background: var(--surface2); transition: background 0.1s; }
+
+    /* ─── small tag ─── */
+    small { font-size: 10px; color: var(--muted); }
+
+    /* ─── 2-column slash grid (프롬프트 패턴용) ─── */
+    .slash-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .slash-grid-2 .slash-item { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .slash-grid-2 .slash-item:nth-child(2n) { border-right: none; }
+    .slash-grid-2 .slash-item:nth-last-child(-n+2) { border-bottom: none; }
+
+    /* ─── Danger card (bypassPermissions) ─── */
+    .card-danger { border-color: #7d3f00; }
+    .card-title-danger { background: #2a1500; color: #e09040; border-color: #7d3f00; }
+    .td-label { color: var(--muted); font-size: 12px; width: 22%; }
+    .td-warn  { color: var(--red); font-size: 12px; font-weight: 700; }
+    .td-warn-desc { color: var(--red); font-size: 12px; }
+
+    /* ─── Permission mode table ─── */
+    .td-mode { font-family: 'Cascadia Code', 'Consolas', monospace; font-size: 12px; color: var(--green); width: 20%; }
+
+    /* ─── Print ─── */
+    @media print {
+      @page { size: A4; margin: 12mm; }
+
+      body { background: #fff; color: #111; font-size: 11px; }
+
+      header {
+        background: #f6f8fa;
+        border-bottom: 1px solid #d0d7de;
+        position: static;
+      }
+      header h1 span { color: #0969da; }
+      .print-btn { display: none; }
+
+      main {
+        max-width: 100%;
+        padding: 12px 0 0;
+        gap: 10px;
+      }
+
+      .card { background: #fff; border-color: #d0d7de; break-inside: avoid; }
+      .card-title { background: #f6f8fa; color: #57606a; }
+
+      kbd {
+        background: #f6f8fa;
+        border-color: #d0d7de;
+        color: #111;
+      }
+
+      .badge-warn { background: #fff8c5; color: #7d4e00; border-color: #d18616; }
+      .badge-win  { background: #ddf4ff; color: #0969da; border-color: #79c0ff; }
+
+      .callout {
+        background: #fff8c5;
+        border-color: #d18616;
+      }
+      .callout-title { color: #7d4e00; }
+      .callout ul li { color: #7d4e00; }
+
+      .prefix-char { color: #1a7f37; }
+      .mode-bubble { background: #f6f8fa; border-color: #d0d7de; color: #111; }
+      .mode-bubble.active { border-color: #1a7f37; color: #1a7f37; }
+      .slash-cmd { color: #1a7f37; }
+      code { color: #0969da; }
+      td:last-child { color: #57606a; }
+
+      footer { display: none; }
+
+      tbody tr:hover { background: transparent; }
+      .card-danger { border-color: #d18616; }
+      .card-title-danger { background: #fff8c5; color: #7d4e00; border-color: #d18616; }
+      .td-warn { color: #cf222e; }
+      .td-warn-desc { color: #cf222e; }
+      .td-mode { color: #1a7f37; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Claude Code <span>치트시트</span></h1>
+    <div class="meta">Windows 기준 · 공식 문서 기반 · v2.1.18+</div>
+  </div>
+  <button class="print-btn" onclick="window.print()">🖨 PDF 저장</button>
+</header>
+
+<main>
+
+  <!-- Windows 주의사항 -->
+  <div class="callout">
+    <div class="callout-title">⚠ Windows 사용 시 주의사항</div>
+    <ul>
+      <li>이미지 붙여넣기: <kbd>Ctrl+V</kbd> 대신 <kbd>Alt+V</kbd></li>
+      <li>Shift+Tab이 안 되면: <kbd>Alt+M</kbd> 시도 — CMD 사용 중이라면 Windows Terminal + PowerShell 7 설치 권장</li>
+      <li>Mac 가이드의 <kbd>Cmd</kbd> 키 = Windows의 <kbd>Alt</kbd> 키</li>
+    </ul>
+  </div>
+
+  <!-- 필수 단축키 -->
+  <div class="card">
+    <div class="card-title">필수 단축키</div>
+    <table>
+      <tr><td><kbd>Ctrl+C</kbd></td><td>현재 작업 취소</td></tr>
+      <tr><td><kbd>Ctrl+D</kbd></td><td>Claude Code 종료</td></tr>
+      <tr><td><kbd>Ctrl+T</kbd></td><td>진행 중인 작업 목록 보기</td></tr>
+      <tr><td><kbd>Ctrl+B</kbd></td><td>작업을 백그라운드로 보내기</td></tr>
+      <tr><td><kbd>Ctrl+R</kbd></td><td>이전 명령어 검색</td></tr>
+      <tr><td><kbd>↑</kbd> / <kbd>↓</kbd></td><td>이전/다음 입력 불러오기</td></tr>
+    </table>
+  </div>
+
+  <!-- 채팅 단축키 -->
+  <div class="card">
+    <div class="card-title">채팅 단축키</div>
+    <table>
+      <tr><td><kbd>Enter</kbd></td><td>메시지 전송</td></tr>
+      <tr><td><kbd>Esc</kbd> <kbd>Esc</kbd></td><td>Rewind — Claude가 바꾼 파일을 이전 상태로 복구</td></tr>
+      <tr><td><kbd>Ctrl+U</kbd></td><td>입력창 내용 전체 삭제</td></tr>
+      <tr><td><kbd>Alt+V</kbd> <span class="badge badge-win">Win</span></td><td>이미지 붙여넣기</td></tr>
+    </table>
+  </div>
+
+  <!-- 모드 전환 -->
+  <div class="card">
+    <div class="card-title">모드 전환</div>
+    <table>
+      <tr><td><kbd>Shift+Tab</kbd></td><td>permission mode 변경</td></tr>
+      <tr><td><kbd>Alt+M</kbd> <span class="badge badge-win">안 될 때</span></td><td>permission mode 변경 (대체)</td></tr>
+      <tr><td><kbd>Alt+P</kbd></td><td>model picker 열기</td></tr>
+      <tr><td><kbd>Alt+T</kbd></td><td>extended thinking 켜기/끄기</td></tr>
+      <tr><td><kbd>Alt+O</kbd></td><td>fast mode 켜기/끄기</td></tr>
+    </table>
+  </div>
+
+  <!-- 권한 모드 사이클 -->
+  <div class="card full">
+    <div class="card-title">권한 모드 — Shift+Tab으로 순환</div>
+    <div class="mode-cycle">
+      <div class="mode-bubble active">default</div>
+      <span class="arrow">→</span>
+      <div class="mode-bubble">accept edits</div>
+      <span class="arrow">→</span>
+      <div class="mode-bubble">plan mode</div>
+      <span class="arrow">→</span>
+      <div class="mode-bubble active">default</div>
+    </div>
+    <table style="margin-top:4px">
+      <tr>
+        <td class="td-mode">default</td>
+        <td>파일 수정, 명령 실행 등 모든 작업 전에 Claude가 허락을 구함. 가장 안전.</td>
+      </tr>
+      <tr>
+        <td class="td-mode">accept edits</td>
+        <td>파일 수정은 자동으로 진행, 터미널 명령은 여전히 확인. 코딩 작업 속도가 빨라짐.</td>
+      </tr>
+      <tr>
+        <td class="td-mode">plan mode</td>
+        <td>실제 수정은 하지 않고 무엇을 바꿀지만 보여줌. 큰 작업 전 검토할 때 유용.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- bypass permissions -->
+  <div class="card full card-danger">
+    <div class="card-title card-title-danger">전체 권한 건너뛰기 (위험 — bypassPermissions)</div>
+    <table>
+      <tr>
+        <td class="td-label">CLI 실행 시</td>
+        <td><code>claude --dangerously-skip-permissions</code></td>
+      </tr>
+      <tr>
+        <td class="td-label">settings.json</td>
+        <td><code>"bypassPermissions": true</code></td>
+      </tr>
+      <tr>
+        <td class="td-label">효과</td>
+        <td class="td-label">모든 확인 창 없이 파일 수정·명령 실행을 자동으로 진행</td>
+      </tr>
+      <tr>
+        <td class="td-warn">주의</td>
+        <td class="td-warn-desc">실수로 파일 삭제·덮어쓰기가 일어나도 막을 방법 없음. 격리된 테스트 환경에서만 사용할 것. 실제 프로젝트에서는 사용 금지.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 자동완성 -->
+  <div class="card">
+    <div class="card-title">자동완성</div>
+    <table>
+      <tr><td><kbd>Tab</kbd></td><td>제안 수락</td></tr>
+      <tr><td><kbd>↑</kbd> / <kbd>↓</kbd></td><td>제안 목록 탐색</td></tr>
+      <tr><td><kbd>Escape</kbd></td><td>닫기</td></tr>
+    </table>
+  </div>
+
+  <!-- 확인 다이얼로그 -->
+  <div class="card">
+    <div class="card-title">승인 요청 화면</div>
+    <table>
+      <tr><td><kbd>Y</kbd> / <kbd>Enter</kbd></td><td>허용</td></tr>
+      <tr><td><kbd>N</kbd> / <kbd>Escape</kbd></td><td>거부</td></tr>
+      <tr><td><kbd>Space</kbd></td><td>선택 토글</td></tr>
+    </table>
+  </div>
+
+  <!-- 입력 접두사 -->
+  <div class="card">
+    <div class="card-title">특수 접두사</div>
+    <div class="prefix-grid">
+      <div class="prefix-item">
+        <div class="prefix-char">/</div>
+        <div class="prefix-desc">명령어 실행<br><small>예: /clear, /model</small></div>
+      </div>
+      <div class="prefix-item">
+        <div class="prefix-char">!</div>
+        <div class="prefix-desc">터미널 명령 실행<br><small>예: ! git status</small></div>
+      </div>
+      <div class="prefix-item">
+        <div class="prefix-char">@</div>
+        <div class="prefix-desc">파일 첨부<br><small>예: @README.md</small></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 슬래시 명령어 -->
+  <div class="card full">
+    <div class="card-title">슬래시 명령어</div>
+    <div class="slash-grid">
+      <div class="slash-item"><div class="slash-cmd">/help</div><div class="slash-desc">사용 가능한 명령어 보기</div></div>
+      <div class="slash-item"><div class="slash-cmd">/clear</div><div class="slash-desc">대화 내용 초기화</div></div>
+      <div class="slash-item"><div class="slash-cmd">/compact</div><div class="slash-desc">대화가 길어졌을 때 요약</div></div>
+      <div class="slash-item"><div class="slash-cmd">/model</div><div class="slash-desc">AI 모델 변경</div></div>
+      <div class="slash-item"><div class="slash-cmd">/cost</div><div class="slash-desc">이번 대화 사용량 확인</div></div>
+      <div class="slash-item"><div class="slash-cmd">/fast</div><div class="slash-desc">빠른 응답 모드 켜기/끄기</div></div>
+      <div class="slash-item"><div class="slash-cmd">/exit</div><div class="slash-desc">Claude Code 종료</div></div>
+      <div class="slash-item"><div class="slash-cmd">/doctor</div><div class="slash-desc">문제 진단</div></div>
+    </div>
+  </div>
+
+  <!-- 프롬프트 패턴 -->
+  <div class="card full">
+    <div class="card-title">자주 쓰는 프롬프트 패턴</div>
+    <div class="slash-grid-2">
+      <div class="slash-item"><div class="slash-cmd">@파일명 + 요청</div><div class="slash-desc">특정 파일을 보면서 작업 — 예: <code>@index.html 버튼 색 바꿔줘</code></div></div>
+      <div class="slash-item"><div class="slash-cmd">계획만 먼저</div><div class="slash-desc">plan mode로 전환 후 요청하면 수정 없이 계획만 보여줌</div></div>
+      <div class="slash-item"><div class="slash-cmd">단계별로 설명해줘</div><div class="slash-desc">코드를 바로 짜는 대신 순서를 먼저 설명하게 함</div></div>
+      <div class="slash-item"><div class="slash-cmd">이 에러 고쳐줘</div><div class="slash-desc">에러 메시지를 그대로 붙여넣으면 원인 분석 + 수정까지</div></div>
+      <div class="slash-item"><div class="slash-cmd">커밋하지 말고</div><div class="slash-desc">Claude가 git commit까지 하지 않도록 제한할 때</div></div>
+      <div class="slash-item"><div class="slash-cmd">! git status</div><div class="slash-desc">대화 중간에 터미널 명령 바로 실행 — Claude한테 묻지 않고 직접 확인</div></div>
+      <div class="slash-item"><div class="slash-cmd">하나씩 확인하면서</div><div class="slash-desc">default 모드에서 각 단계마다 승인을 받으며 진행</div></div>
+      <div class="slash-item"><div class="slash-cmd">@파일A @파일B 비교해줘</div><div class="slash-desc">여러 파일을 동시에 참조하게 할 때</div></div>
+    </div>
+  </div>
+
+  <!-- 멀티라인 입력 -->
+  <div class="card">
+    <div class="card-title">긴 내용 입력하기</div>
+    <table>
+      <tr><td><kbd>\</kbd> + <kbd>Enter</kbd></td><td>줄바꿈 후 계속 입력</td></tr>
+      <tr><td>붙여넣기</td><td>긴 코드·에러는 그냥 복사해서 붙여넣기</td></tr>
+      <tr><td><kbd>Ctrl+G</kbd></td><td>외부 에디터(메모장 등)에서 작성 후 전송</td></tr>
+    </table>
+  </div>
+
+  <!-- CLAUDE.md 팁 -->
+  <div class="card wide">
+    <div class="card-title">CLAUDE.md — Claude에게 규칙 주기</div>
+    <div class="path-list">
+      <div class="path-item"><span class="path-label">언어 설정</span><code>항상 한국어로 답해줘</code></div>
+      <div class="path-item"><span class="path-label">커밋 규칙</span><code>커밋 전에 항상 확인을 구해줘</code></div>
+      <div class="path-item"><span class="path-label">코드 스타일</span><code>들여쓰기는 2칸, 세미콜론 없이</code></div>
+      <div class="path-item"><span class="path-label">금지 사항</span><code>package.json은 절대 수정하지 마</code></div>
+      <div class="path-item"><span class="path-label">프로젝트 설명</span><code>이 프로젝트는 Next.js + TypeScript로 만든 쇼핑몰이야</code></div>
+    </div>
+  </div>
+
+  <!-- 설정 파일 경로 -->
+  <div class="card wide">
+    <div class="card-title">주요 설정 파일 위치</div>
+    <div class="path-list">
+      <div class="path-item"><span class="path-label">전체 규칙</span><code>~/.claude/CLAUDE.md</code></div>
+      <div class="path-item"><span class="path-label">프로젝트 규칙</span><code>프로젝트폴더/CLAUDE.md</code></div>
+      <div class="path-item"><span class="path-label">설정</span><code>~/.claude/settings.json</code></div>
+      <div class="path-item"><span class="path-label">단축키 변경</span><code>~/.claude/keybindings.json</code></div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  공식 문서: <a href="https://code.claude.com/docs/en/keybindings">code.claude.com/docs/en/keybindings</a>
+  &nbsp;·&nbsp;
+  <a href="https://github.com/wilwaldon/claude-code-cheat-sheet">참고: wilwaldon/claude-code-cheat-sheet</a>
+</footer>
+
+</body>
+</html>

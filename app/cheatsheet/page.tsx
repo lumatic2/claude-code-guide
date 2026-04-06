@@ -13,7 +13,15 @@ export default function CheatsheetPage() {
   const source = readFileSync(filePath, "utf-8");
   return (
     <div>
-      <div className="mb-4 flex justify-end">
+      <div className="mb-4 flex items-center justify-between">
+        <a
+          href="/cheatsheet.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm text-zinc-400 underline hover:text-zinc-200"
+        >
+          인쇄용 버전 →
+        </a>
         <PrintButton />
       </div>
       <article className="prose prose-invert max-w-none prose-table:overflow-x-auto">
