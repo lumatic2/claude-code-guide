@@ -11,7 +11,7 @@ const navItems = [
   { href: "/guide/basics", label: "기본 사용법" },
   { href: "/guide/advanced", label: "고급 설정" },
   { href: "/guide/workflows", label: "실전 워크플로우" },
-  { href: "https://lumatic2.github.io/claude-code-cheatsheet/", label: "치트시트 ↗", external: true },
+  { href: "/cheatsheet", label: "치트시트" },
 ];
 
 function isActive(pathname: string, href: string): boolean {
