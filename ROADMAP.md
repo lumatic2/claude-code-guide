@@ -5,32 +5,41 @@
 ## 현재 상태
 
 - 사이트: Vercel 프로덕션 배포, Cloudflare 서브도메인 `guide.askewly.com` 연결
-- 콘텐츠: `intro`, `setup`, `basics`, `workflows`, `advanced`, `cheatsheet` 6개 MDX
-- 스킬: `skill/SKILL.md` + `skill/references/{track-website,track-writing,track-pdf,track-files}.md`
+- 콘텐츠: `intro`, `setup`, `basics`, `workflows`, `advanced`, `tips`, `cheatsheet` 7개 MDX
+- 스킬: `/claude-guide` 3단계 온보딩 (Lv 1 트랙 4개 + Lv 2 샌드박스 + Lv 3 나만의 스킬)
 
-## P0 — 정확성 (잘못된 정보 수정)
+## 완료
 
-- [ ] `workflows.mdx`의 `/plan` 슬래시 명령 예시 제거·수정 → Shift+Tab 플랜 모드로 교체
-- [ ] `advanced.mdx` 권한 모드명과 `/permissions set` 문법 공식 문서 기준으로 검증·보정
-- [ ] `cheatsheet.mdx`에서 gstack 전용 스킬(`/browse`, `/qa`, `/review`, `/learn`, `/careful`) 내장 명령어 섹션에서 분리 또는 제거
-- [ ] `cheatsheet.mdx` `/fast`에 "Opus 4.6 전용" 조건 병기
-- [ ] `cheatsheet.mdx` `/effort`, `Ctrl+B`, `Ctrl+L` 등 실재 여부 검증 (문서 근거 확보 후 유지/삭제)
+### 가이드 사이트 정확성·일관성 (2026-04-18, `491a084`)
+- [x] `workflows.mdx` `/plan` 예시 → Plan Mode 공식 동작으로 교체
+- [x] `advanced.mdx` 권한 모드 `auto`/`dontAsk` 추가, 잘못된 `/permissions set` 구문 제거
+- [x] `cheatsheet.mdx` gstack 전용 스킬 분리·제거 (`/review`는 내장이라 유지)
+- [x] `cheatsheet.mdx` `/fast` Opus 4.6 전용 표기
+- [x] `cheatsheet.mdx` Ctrl+L 설명 정확화 ("프롬프트 입력 지우기 + 재그리기")
+- [x] 랜딩 히어로 "터미널에서" → "Claude 앱에서"
+- [x] `basics.mdx` 슬래시·단축키 표 치트시트와 동기화
+- [x] `setup.mdx` 스킬 설치 스크립트 4트랙 완전 지원
+- [x] `/drawing`·`/writing`·`/music`·`/creative` advanced.mdx에 연계
+- [x] `/guide/tips` 페이지 신설 (비용·컨텍스트·막혔을 때 루틴 + FAQ)
+- [x] 각 MDX 하단 공식 문서 딥링크
+- [x] MCP 개념 섹션 추가
 
-## P1 — 일관성
+### 스킬 리네이밍·재설계 (2026-04-18, `1804857`)
+- [x] `/claude-study` → `/claude-guide` 전역 리네이밍
+- [x] 3단계 레벨 구조: Lv 1 첫 결과물 → Lv 2 샌드박스 → Lv 3 나만의 스킬
+- [x] `progress.json`(`~/.claude-guide/`) 기반 복귀자 분기
+- [x] `track-*.md` 4개 Collect/Prepare/Create/Verify/Extend 스키마 통일
+- [x] `level-2-sandbox.md`, `level-3-skill.md` 신설
+- [x] AskUserQuestion 포맷 규약 + Close Protocol(DONE/BLOCKED/NEEDS_CONTEXT)
+- [x] install.sh / install.ps1 / setup.mdx 설치 스크립트 동기화
 
-- [ ] `app/page.tsx` 히어로 문구 "터미널에서 대화하는" → 앱 기준 표현으로 교체 (커밋 9eb27b7 방향과 정합)
-- [ ] `basics.mdx` 슬래시 명령어·단축키 표를 치트시트와 동일 범위로 확장
-- [ ] `setup.mdx` 스킬 설치 스크립트에 `track-pdf.md`, `track-files.md` 추가 (B분기 4트랙 완전 지원)
-- [ ] `SKILL.md` C-D에서 소개하는 스킬(`/drawing`, `/writing`, `/music`, `/creative`)을 가이드 사이트에서도 링크/설명
+## 다음에 할 일
 
-## P2 — 추가 콘텐츠
-
-- [ ] FAQ/실전 팁 페이지 신설: 비용 관리(`/cost`·모델 선택), 컨텍스트 관리(`/compact`·`/clear`), 막혔을 때 디버깅 루틴
-- [ ] 공식 문서(`docs.claude.com/docs/claude-code`) 딥링크 보강 (각 개념 페이지 하단 "더 읽기")
-- [ ] MCP 개념 소개 섹션(advanced 또는 별도 페이지)
+- [ ] `/claude-guide` 실제 세션 돌려보며 UX 점검 (Lv 1 완주)
+- [ ] AskUserQuestion에서 사용자가 "명확화" 요청 시 재질문 플로우 정돈 — 이번 세션에서 피곤해서 중단한 케이스 발견
 - [ ] 실제 강의 1회 예행 후 수강자 피드백 반영
+- [ ] Lv 2/3 reference 실사용 후 부족한 지점 보강
 
 ## 이어서 할 일
 
-- P0 항목부터 착수. 우선 `workflows.mdx`의 `/plan` 예시 교체 — 공식 플랜 모드 동작(Shift+Tab)으로 스크린샷 또는 대화 예시 재작성.
-- `/fast`, `/effort`, 권한 모드 문법 검증은 공식 문서 fetch 한 번으로 묶어 처리.
+- 다음 세션: 충분히 쉰 뒤 `/claude-guide` 재호출해서 웹사이트 트랙 완주. progress.json이 생성되는지, Close Protocol이 실제로 동작하는지 확인.
