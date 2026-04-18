@@ -1,59 +1,54 @@
-# 트랙: 파일 정리 & 자동화
+# Track: 파일 정리
 
-이 파일은 claude-study 스킬의 파일 정리 트랙 가이드다.
+Lv 1 트랙 중 하나. 지저분한 폴더 하나를 정리하고 그 스크립트를 파일로 남긴다.
 
-## 1단계: 정리할 대상 파악
+## 1. Collect
 
-AskUserQuestion으로 한 번에 물어본다:
-- 어느 폴더를 정리하고 싶으신가요? (예: 바탕화면, 다운로드 폴더)
-- 어떻게 정리하고 싶으신가요?
-  - A) 종류별로 — 사진/문서/영상/기타로 나누기
-  - B) 날짜별로 — 연도/월 폴더로 나누기
-  - C) 이름 규칙 통일 — 파일 이름을 일정한 형식으로 바꾸기
-  - D) 오래된 파일 정리 — 오래된 파일만 따로 모으기
+AskUserQuestion:
 
-> 정리 방법이 헷갈리면 A(종류별)가 가장 무난해요. 사진은 사진끼리, 문서는 문서끼리 모이는 방식이에요.
+- 어느 폴더? — A) 바탕화면 B) 다운로드 C) 직접 입력
+- 어떻게? — A) 종류별(사진/문서/영상/기타) B) 날짜별(연/월) C) 이름 규칙 통일 D) 오래된 파일만 Archive로
 
-## 2단계: 현재 상태 확인
+> 헷갈리면 A(종류별)가 가장 무난해요.
 
-폴더 안 파일 목록과 개수를 먼저 파악한다:
+## 2. Prepare
 
-    ls -la {대상 폴더} 2>/dev/null || dir "{대상 폴더}"
+대상 폴더 파일 목록·개수 파악:
 
-파악 후 사용자에게 요약 보고:
+```bash
+ls -la "{대상}" 2>/dev/null || dir "{대상}"
+```
 
-"[폴더명] 안에 파일이 총 N개 있어요.
-사진 X개, 문서 Y개, 기타 Z개 정도예요.
-[선택한 방식]으로 정리하면 이렇게 됩니다: ..."
+결과 요약 후 실행 계획을 Plan Mode처럼 보여주고 확인받는다:
 
-## 3단계: 계획 확인 (중요)
+```
+{폴더}에 파일 N개 있어요.
+  사진 X개, 문서 Y개, 기타 Z개
 
-실행 전 반드시 /plan으로 계획을 먼저 보여주고 확인받는다:
+{선택 방식}으로 정리하면:
+  📁 사진/ → jpg, png, heic (N개)
+  📁 문서/ → pdf, docx, xlsx (N개)
+  📁 기타/ → 나머지 (N개)
 
-"실행 전에 어떻게 할지 보여드릴게요:
+진행할까요?
+```
 
-  📁 사진/ → jpg, png, heic, gif 파일 (N개)
-  📁 문서/ → pdf, docx, xlsx, pptx, txt 파일 (N개)
-  📁 영상/ → mp4, mov, avi 파일 (N개)
-  📁 기타/ → 나머지 파일 (N개)
+사용자 OK 받기 전엔 3단계 진입 금지.
 
-총 N개 파일이 이동됩니다.
-진행할까요?"
+## 3. Create
 
-사용자가 OK하면 4단계로 이동.
+스크립트를 파일로 먼저 저장한 뒤 실행한다.
 
-> 파일을 이동하면 되돌리기 어려워요. 꼭 계획을 먼저 확인하세요.
+```bash
+mkdir -p ~/Desktop/file-organizer
+```
 
-## 4단계: 실행
+선택별 스크립트를 `~/Desktop/file-organizer/organize.py`에 저장 (사용자가 나중에 재실행 가능하도록):
 
-선택한 방식에 따라 처리한다.
-
-### A) 종류별 정리
-
-확장자 기준으로 분류하는 스크립트를 작성하고 실행:
+### A) 종류별
 
 ```python
-import os, shutil
+import shutil
 from pathlib import Path
 
 target = Path("{대상 폴더}").expanduser()
@@ -77,16 +72,13 @@ for file in target.iterdir():
     dest.mkdir(exist_ok=True)
     shutil.move(str(file), str(dest / file.name))
     moved += 1
-
-print(f"완료: {moved}개 파일 정리됨")
+print(f"완료: {moved}개 이동")
 ```
 
-### B) 날짜별 정리
-
-파일의 수정 날짜 기준으로 연도/월 폴더로 분류:
+### B) 날짜별
 
 ```python
-import os, shutil
+import shutil
 from pathlib import Path
 from datetime import datetime
 
@@ -100,28 +92,21 @@ for file in target.iterdir():
     dest.mkdir(parents=True, exist_ok=True)
     shutil.move(str(file), str(dest / file.name))
     moved += 1
-
-print(f"완료: {moved}개 파일 정리됨")
+print(f"완료: {moved}개 이동")
 ```
 
-### C) 이름 규칙 통일
+### C) 이름 규칙
 
-원하는 이름 형식을 확인 후 일괄 변경:
+추가 AskUserQuestion으로 형식 확정:
+- A) 날짜 prefix — `20260418_원래이름.jpg`
+- B) 공백 → 언더스코어
+- C) 전부 소문자
+- D) 번호 prefix — `001_파일명`
 
-AskUserQuestion: "파일 이름을 어떤 형식으로 바꿀까요?"
-- A) 날짜 앞에 붙이기 — 20260405_원래이름.jpg
-- B) 공백을 밑줄로 — 내 사진.jpg → 내_사진.jpg
-- C) 소문자로 통일 — MyPhoto.JPG → myphoto.jpg
-- D) 번호 붙이기 — 001_파일명, 002_파일명...
-
-선택에 따라 스크립트 작성 후 실행.
-
-### D) 오래된 파일 정리
-
-기준 날짜(기본: 1년 이상)보다 오래된 파일을 Archive 폴더로 이동:
+### D) 오래된 파일 Archive
 
 ```python
-import os, shutil
+import shutil
 from pathlib import Path
 from datetime import datetime, timedelta
 
@@ -133,56 +118,47 @@ moved = 0
 for file in target.iterdir():
     if not file.is_file():
         continue
-    mtime = datetime.fromtimestamp(file.stat().st_mtime)
-    if mtime < cutoff:
+    if datetime.fromtimestamp(file.stat().st_mtime) < cutoff:
         shutil.move(str(file), str(archive / file.name))
         moved += 1
-
-print(f"완료: {moved}개 오래된 파일 → Archive/")
+print(f"완료: {moved}개 Archive/로 이동")
 ```
 
-## 5단계: 결과 보고
+저장 후 실행:
 
-실행 후 결과 요약:
+```bash
+python ~/Desktop/file-organizer/organize.py
+```
 
-"정리 완료! 🎉
+## 4. Verify
+
+결과 요약:
+
+```
+정리 완료!
 
   ✓ 사진/ N개
   ✓ 문서/ N개
-  ✓ 영상/ N개
   ✓ 기타/ N개
 
 폴더를 열어서 확인해보세요.
-마음에 안 드는 부분이 있으면 말씀해주세요."
+이상하면 바로 알려주세요 — 되돌리는 스크립트 만들어드릴게요.
+```
 
-문제가 생겼을 때:
-- 같은 이름 파일 충돌 → 자동으로 _(1), _(2) 붙여서 처리
+충돌 처리:
+- 같은 이름 충돌 → `_(1)`, `_(2)` 자동 접미사
 - 권한 오류 → 원인 설명 후 해결 시도
-- 실수로 잘못 이동 → 되돌리는 스크립트 즉시 제공
 
-## 6단계: 자동화 (선택)
+## 5. Extend (선택)
 
-AskUserQuestion: "이 정리를 앞으로 자동으로 하고 싶으신가요?"
+AskUserQuestion: "이 정리를 자동으로 반복하고 싶으세요?"
 
-Yes인 경우 — 정리 스크립트를 파일로 저장:
-
-"정리 스크립트를 ~/projects/file-organizer/organize.py 로 저장했어요.
-다음에 정리하고 싶을 때 Claude Code에게 '파일 정리 스크립트 실행해줘'라고 하면 됩니다."
+- A) 일회성이면 OK (그만)
+- B) 스크립트 바탕화면에 단축키로 만들기
+- C) 다른 폴더에도 같은 방식 적용
+- D) 자동 실행은 안 하지만 스크립트만 `~/projects/`로 옮겨두기
 
 ---
 
-## 다음에 해볼 것
-
-파일 정리를 완료했어요! 더 해보고 싶다면:
-
-**바로 이어서**
-- "이 폴더도 같은 방식으로 정리해줘" → 다른 폴더에 적용
-- "정리 기준을 바꿔줘" → 방식 변경
-
-**다른 트랙 도전**
-- 웹사이트 트랙: 정리한 사진들로 갤러리 페이지 만들기
-- PDF 트랙: 문서들을 하나의 PDF로 합치기
-
-**Claude Code 더 알아보기**
-- `/help` 입력 → Claude Code의 모든 기능 보기
-- https://guide.askewly.com → 개념 정리 가이드
+완료 후 Close Protocol.
+`artifacts`에 `~/Desktop/file-organizer/organize.py` 추가.

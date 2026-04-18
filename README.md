@@ -17,7 +17,7 @@ curl -fsSL https://raw.githubusercontent.com/Mod41529/claude-code-guide/master/i
 설치 완료 후 Claude Code를 열고:
 
 ```
-/claude-study
+/claude-guide
 ```
 
 코딩을 몰라도 됩니다. 웹사이트, 소설, PDF 중 하나를 골라 직접 만들면서 Claude Code를 배웁니다.
@@ -30,7 +30,7 @@ curl -fsSL https://raw.githubusercontent.com/Mod41529/claude-code-guide/master/i
 - Claude Code 소개, 설치, 핵심 사용법, 고급 설정, 워크플로우, 치트시트
 
 ### 학습 스킬 (`/skill`)
-- `/claude-study` — 결과물을 만들며 배우는 입문 스킬
+- `/claude-guide` — 3단계 온보딩(첫 결과물 → 샌드박스 → 나만의 스킬)
   - 웹사이트 트랙 (Next.js + Vercel)
   - 소설/에세이 트랙
   - PDF 문서 트랙 (Typst)

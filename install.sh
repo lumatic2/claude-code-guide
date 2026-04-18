@@ -15,12 +15,12 @@ echo ""
 
 mkdir -p "$SKILLS_DIR"
 
-# claude-study 스킬 설치
-echo "📦 claude-study 설치 중..."
-mkdir -p "$SKILLS_DIR/claude-study/references"
-curl -fsSL "$REPO/skill/SKILL.md" -o "$SKILLS_DIR/claude-study/SKILL.md" 2>/dev/null && echo "  ✓ SKILL.md" || echo "  ⚠️  다운로드 실패"
-for ref in track-website track-writing track-pdf track-files; do
-  curl -fsSL "$REPO/skill/references/$ref.md" -o "$SKILLS_DIR/claude-study/references/$ref.md" 2>/dev/null && echo "  ✓ references/$ref.md" || true
+# claude-guide 스킬 설치
+echo "📦 claude-guide 설치 중..."
+mkdir -p "$SKILLS_DIR/claude-guide/references"
+curl -fsSL "$REPO/skill/SKILL.md" -o "$SKILLS_DIR/claude-guide/SKILL.md" 2>/dev/null && echo "  ✓ SKILL.md" || echo "  ⚠️  다운로드 실패"
+for ref in track-website track-writing track-pdf track-files level-2-sandbox level-3-skill; do
+  curl -fsSL "$REPO/skill/references/$ref.md" -o "$SKILLS_DIR/claude-guide/references/$ref.md" 2>/dev/null && echo "  ✓ references/$ref.md" || true
 done
 
 # 스타터 스킬 설치
@@ -48,6 +48,6 @@ echo "╔═══════════════════════�
 echo "║          설치 완료! 🎉               ║"
 echo "╚══════════════════════════════════════╝"
 echo ""
-echo "Claude Code를 열고 /claude-study 를 입력해서 시작하세요."
+echo "Claude Code를 열고 /claude-guide 를 입력해서 시작하세요."
 echo "가이드 사이트: https://guide.askewly.com"
 echo ""

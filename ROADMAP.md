@@ -1,6 +1,6 @@
 # Claude Code Guide — Roadmap
 
-> 가이드 사이트(`guide.askewly.com`)와 `/claude-study` 스킬의 유지·개선 작업 추적.
+> 가이드 사이트(`guide.askewly.com`)와 `/claude-guide` 스킬의 유지·개선 작업 추적.
 
 ## 현재 상태
 

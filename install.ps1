@@ -10,15 +10,15 @@ Write-Host "║   Claude Code 스타터 팩 설치 중...   ║"
 Write-Host "╚══════════════════════════════════════╝"
 Write-Host ""
 
-# claude-study 스킬 설치
-Write-Host "📦 claude-study 설치 중..."
-New-Item -ItemType Directory -Force -Path "$SKILLS_DIR\claude-study\references" | Out-Null
-Invoke-WebRequest "$REPO/skill/SKILL.md" -OutFile "$SKILLS_DIR\claude-study\SKILL.md" -UseBasicParsing
+# claude-guide 스킬 설치
+Write-Host "📦 claude-guide 설치 중..."
+New-Item -ItemType Directory -Force -Path "$SKILLS_DIR\claude-guide\references" | Out-Null
+Invoke-WebRequest "$REPO/skill/SKILL.md" -OutFile "$SKILLS_DIR\claude-guide\SKILL.md" -UseBasicParsing
 Write-Host "  ✓ SKILL.md"
 
-foreach ($ref in @("track-website", "track-writing", "track-pdf", "track-files")) {
+foreach ($ref in @("track-website", "track-writing", "track-pdf", "track-files", "level-2-sandbox", "level-3-skill")) {
     try {
-        Invoke-WebRequest "$REPO/skill/references/$ref.md" -OutFile "$SKILLS_DIR\claude-study\references\$ref.md" -UseBasicParsing
+        Invoke-WebRequest "$REPO/skill/references/$ref.md" -OutFile "$SKILLS_DIR\claude-guide\references\$ref.md" -UseBasicParsing
         Write-Host "  ✓ references/$ref.md"
     } catch { Write-Host "  ⚠️  $ref.md 다운로드 실패" }
 }
@@ -38,5 +38,5 @@ Write-Host "╔═════════════════════�
 Write-Host "║          설치 완료! 🎉               ║"
 Write-Host "╚══════════════════════════════════════╝"
 Write-Host ""
-Write-Host "Claude Code를 열고 /claude-study 를 입력해서 시작하세요."
+Write-Host "Claude Code를 열고 /claude-guide 를 입력해서 시작하세요."
 Write-Host ""
