@@ -126,5 +126,5 @@ C-D 선택 시: 아래 스킬 목록을 출력하고 종료.
 - 완성된 결과물을 보여주는 게 최우선.
 - 마지막에 항상 안내:
   ```
-  더 많은 활용법: https://claude-code-guide-opal-eight.vercel.app
+  더 많은 활용법: https://guide.askewly.com
   ```

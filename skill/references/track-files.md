@@ -185,4 +185,4 @@ Yes인 경우 — 정리 스크립트를 파일로 저장:
 
 **Claude Code 더 알아보기**
 - `/help` 입력 → Claude Code의 모든 기능 보기
-- https://claude-code-guide-yusongs-projects-c6e6da7f.vercel.app → 개념 정리 가이드
+- https://guide.askewly.com → 개념 정리 가이드
