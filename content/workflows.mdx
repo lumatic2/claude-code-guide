@@ -100,8 +100,8 @@ Claude: style.css 수정 완료.
 어떤 파일들이 있고, 어떻게 정리하고 싶은지 말해주세요.
 </StepCard>
 
-<StepCard step={2} title="실행 전 계획 확인">
-`/plan`으로 먼저 계획을 확인하세요. 파일을 잘못 이동하면 되돌리기 어렵습니다.
+<StepCard step={2} title="실행 전 계획 모드">
+`Shift+Tab`으로 **Plan Mode**에 진입하거나 요청 앞에 `/plan`을 붙이세요. Plan Mode에서는 Claude가 실제 변경 없이 계획만 세워 보여줍니다. 파일을 잘못 이동하면 되돌리기 어렵습니다.
 </StepCard>
 
 <StepCard step={3} title="실행 후 확인">
@@ -111,22 +111,16 @@ Claude: style.css 수정 완료.
 **실제 대화 예시:**
 
 ```
-You: 바탕화면에 파일이 너무 많아. 
-     사진은 사진/, 문서는 문서/, 나머지는 기타/로 
-     자동으로 분류해줘.
+You: /plan 바탕화면 파일을 사진/, 문서/, 기타/로 자동 분류해줘.
 
-Claude: /plan으로 먼저 확인할까요?
-
-You: /plan
-
-Claude: ## 실행 계획
+Claude: ## 실행 계획 (Plan Mode)
   1. 바탕화면 파일 목록 분석
   2. jpg/png/heic → 사진/ 폴더로 이동
   3. pdf/docx/xlsx/pptx → 문서/ 폴더로 이동
   4. 나머지 → 기타/ 폴더로 이동
   5. 폴더 없으면 자동 생성
-  
-  총 47개 파일 처리 예정입니다. 실행할까요?
+
+  총 47개 파일 처리 예정입니다. 승인하시겠어요?
 
 You: 응 실행해줘.
 
@@ -175,3 +169,11 @@ You: 1, 2번만 적용해줘.
 
 Claude: auth.js 수정 완료했습니다.
 ```
+
+---
+
+## 더 읽기
+
+- 공통 워크플로우 레시피: [code.claude.com/docs/en/common-workflows](https://code.claude.com/docs/en/common-workflows)
+- 체크포인트와 되감기: [code.claude.com/docs/en/checkpointing](https://code.claude.com/docs/en/checkpointing)
+- Plan Mode 자세히: [code.claude.com/docs/en/permission-modes](https://code.claude.com/docs/en/permission-modes)

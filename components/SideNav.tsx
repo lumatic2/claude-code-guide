@@ -4,13 +4,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
-const navItems = [
+type NavItem = { href: string; label: string; external?: boolean };
+
+const navItems: NavItem[] = [
   { href: "/", label: "홈" },
   { href: "/guide/setup", label: "설치 가이드" },
   { href: "/guide/intro", label: "입문 소개" },
   { href: "/guide/basics", label: "기본 사용법" },
   { href: "/guide/advanced", label: "고급 설정" },
   { href: "/guide/workflows", label: "실전 워크플로우" },
+  { href: "/guide/tips", label: "실전 팁 · FAQ" },
   { href: "/cheatsheet", label: "치트시트" },
 ];
 

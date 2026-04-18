@@ -6,6 +6,7 @@ const pages = [
   { href: "/guide/basics", label: "기본 사용법" },
   { href: "/guide/advanced", label: "고급 설정" },
   { href: "/guide/workflows", label: "실전 워크플로우" },
+  { href: "/guide/tips", label: "실전 팁 · FAQ" },
   { href: "/cheatsheet", label: "치트시트" },
 ];
 

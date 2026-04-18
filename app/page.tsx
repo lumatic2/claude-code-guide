@@ -31,7 +31,7 @@ export default function Home() {
           Claude Code
         </h1>
         <p className="max-w-lg text-base sm:text-lg text-zinc-400 leading-relaxed px-4 sm:px-0">
-          Claude Code는 터미널에서 대화하는 AI 에이전트입니다.<br className="hidden sm:block" />
+          Claude Code는 Claude 앱에서 대화로 실행하는 AI 에이전트입니다.<br className="hidden sm:block" />
           <span className="sm:hidden"> </span>글쓰기 · 디자인 · 음악 · 시스템 설계
         </p>
         <Link
