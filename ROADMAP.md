@@ -33,13 +33,21 @@
 - [x] AskUserQuestion 포맷 규약 + Close Protocol(DONE/BLOCKED/NEEDS_CONTEXT)
 - [x] install.sh / install.ps1 / setup.mdx 설치 스크립트 동기화
 
+### /claude-guide Lv 1 실사용 & 1차 개선 (2026-04-19, custom-skills 레포)
+- [x] Lv 1 웹사이트 트랙 완주 — progress.json 생성·Close Protocol 동작 확인 (`~/Desktop/yusung-site/index.html`)
+- [x] source(`custom-skills/claude-study`) → `claude-guide`로 재정렬, deployed 기준 sync
+- [x] 웹사이트 트랙 첫 질문 "어떤 웹사이트?" 용도 분기 (포트폴리오/링크/게임/이벤트)
+- [x] Extend 단계 안내 보강 (Netlify Drop 유지시간·공유 테스트·Vercel/Cloudflare 대안)
+- [x] 스킬 진입 인트로 파트 추가 (유성 1인칭 + Claude Code 설명)
+- [x] AskUserQuestion 사용 규약 2개 — 자유입력은 자연 대화로, 한글 `\uXXXX` 이스케이프 금지
+
 ## 다음에 할 일
 
-- [ ] `/claude-guide` 실제 세션 돌려보며 UX 점검 (Lv 1 완주)
-- [ ] AskUserQuestion에서 사용자가 "명확화" 요청 시 재질문 플로우 정돈 — 이번 세션에서 피곤해서 중단한 케이스 발견
+- [ ] **Lv 1 디자인 템플릿화** — Stitch MCP로 카테고리별 템플릿 작성 후 `references/templates/*.html`로 저장. 플레이스홀더 문법 `__NAME__`. 순서: 포트폴리오 1 → 링크 1 → 게임 3 → 이벤트 2. 각 세션별로 분리 진행
+- [ ] AskUserQuestion에서 사용자가 "명확화" 요청 시 재질문 플로우 정돈
 - [ ] 실제 강의 1회 예행 후 수강자 피드백 반영
 - [ ] Lv 2/3 reference 실사용 후 부족한 지점 보강
 
 ## 이어서 할 일
 
-- 다음 세션: 충분히 쉰 뒤 `/claude-guide` 재호출해서 웹사이트 트랙 완주. progress.json이 생성되는지, Close Protocol이 실제로 동작하는지 확인.
+- 다음 세션: **새 CC 세션**으로 시작(이전 토글한 `stitch-mcp`가 적용됨). "stitch로 포트폴리오 템플릿 만들자" 로 진입 → Stitch variant 1~3개 생성 → 최종본에 플레이스홀더 주입 → `~/projects/custom-skills/claude-guide/references/templates/portfolio-minimal.html` 저장 → `track-website.md` Create 섹션에 "템플릿 읽어서 치환" 워크플로우 반영.
