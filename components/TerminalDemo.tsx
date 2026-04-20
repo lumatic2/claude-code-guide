@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const PORTFOLIO_URL = 'https://luma3-portfolio.vercel.app'
 
@@ -66,6 +66,9 @@ export default function TerminalDemo() {
   const [resultOpen, setResultOpen] = useState(false)
   const [resultVisible, setResultVisible] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [playing, setPlaying] = useState(true)
+  const sceneIndexRef = useRef(0)
+  useEffect(() => { sceneIndexRef.current = sceneIndex }, [sceneIndex])
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 640)
@@ -75,6 +78,7 @@ export default function TerminalDemo() {
   }, [])
 
   useEffect(() => {
+    if (!playing) return
     let cancelled = false
     const timeouts: ReturnType<typeof setTimeout>[] = []
 
@@ -133,14 +137,14 @@ export default function TerminalDemo() {
       if (!cancelled) setShowCursor(c => !c)
     }, CURSOR_INTERVAL)
 
-    runScene(0)
+    runScene(sceneIndexRef.current)
 
     return () => {
       cancelled = true
       timeouts.forEach(clearTimeout)
       clearInterval(cursorTimer)
     }
-  }, [])
+  }, [playing])
 
   const scene = SCENES[sceneIndex]
   const visibleLines = scene.lines.slice(0, visibleLineCount)
@@ -187,6 +191,23 @@ export default function TerminalDemo() {
           <div className="flex items-center gap-3 border-b border-white/10 bg-white/[0.03] px-5 py-3 shrink-0">
             <span className="h-5 w-0.5 rounded-full bg-white/80" />
             <span className="text-xs font-semibold tracking-widest text-white/70 uppercase">claude</span>
+            <button
+              type="button"
+              onClick={() => setPlaying(p => !p)}
+              aria-label={playing ? '일시정지' : '재생'}
+              className="ml-auto flex h-8 w-8 items-center justify-center rounded-md text-white/60 hover:bg-white/10 hover:text-white"
+            >
+              {playing ? (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <rect x="6" y="5" width="4" height="14" rx="1" />
+                  <rect x="14" y="5" width="4" height="14" rx="1" />
+                </svg>
+              ) : (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              )}
+            </button>
           </div>
           <div className="flex-1 px-5 py-5 text-sm leading-7 overflow-hidden">
             <div className="flex items-start gap-2 text-zinc-100">
@@ -217,8 +238,8 @@ export default function TerminalDemo() {
           </div>
         </div>
 
-        {/* Desktop: 그리드 오른쪽 칼럼 */}
-        {!isMobile && (
+        {/* Desktop: 그리드 오른쪽 칼럼 (resultOpen 전엔 마운트 안 함 — iframe 선로딩 방지) */}
+        {!isMobile && resultOpen && (
           <div
             className="flex flex-col border-l border-white/10 overflow-hidden"
             style={{

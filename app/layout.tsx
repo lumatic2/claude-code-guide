@@ -25,7 +25,7 @@ export default function RootLayout({
         <div className="min-h-screen bg-gradient-to-b from-zinc-950 to-zinc-900">
           <SideNav />
           <main className="md:pl-72">
-            <div className="mx-auto w-full max-w-4xl px-4 py-6 sm:px-8 sm:py-10">
+            <div className="mx-auto w-full max-w-4xl px-4 py-8 sm:px-8 sm:py-10">
               {children}
             </div>
             <footer className="mx-auto w-full max-w-4xl border-t border-zinc-800 px-4 py-6 sm:px-8">
