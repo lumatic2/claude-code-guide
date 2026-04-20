@@ -113,15 +113,13 @@ export default function TerminalDemo() {
 
         const streamingDone = typingDone + scene.lines.length * LINE_INTERVAL + STREAM_HOLD
 
-        // 5. 결과 패널 오픈 (모바일은 스킵)
-        if (!isMobile) {
-          timeouts.push(setTimeout(() => {
-            if (!cancelled) {
-              setResultOpen(true)
-              setTimeout(() => { if (!cancelled) setResultVisible(true) }, 180)
-            }
-          }, streamingDone))
-        }
+        // 5. 결과 패널 오픈 (모바일은 오버레이, 데스크톱은 그리드 분할)
+        timeouts.push(setTimeout(() => {
+          if (!cancelled) {
+            setResultOpen(true)
+            setTimeout(() => { if (!cancelled) setResultVisible(true) }, 180)
+          }
+        }, streamingDone))
 
         // 6. 다음 씬 예약
         timeouts.push(setTimeout(() => {
@@ -148,15 +146,37 @@ export default function TerminalDemo() {
   const visibleLines = scene.lines.slice(0, visibleLineCount)
   const resultLabel = RESULT_LABELS[sceneIndex]
 
+  const resultPanelInner = (
+    <>
+      {/* Browser chrome */}
+      <div className="flex items-center gap-2 border-b border-white/10 bg-zinc-800/60 px-3 py-2 shrink-0">
+        <div className="flex gap-1.5">
+          <span className="h-2.5 w-2.5 rounded-full bg-red-500/70" />
+          <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
+          <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/70" />
+        </div>
+        <div className="flex-1 rounded bg-zinc-700/60 px-3 py-1 text-[10px] text-zinc-400 truncate">
+          {resultLabel.address}
+        </div>
+      </div>
+      {/* Content area */}
+      <div className="relative flex-1 overflow-hidden">
+        {sceneIndex === 0 && <PortfolioGridPanel />}
+        {sceneIndex === 1 && <WritingPanel />}
+        {sceneIndex === 2 && <DrawingPanel />}
+      </div>
+    </>
+  )
+
   return (
     <div
-      className="w-full overflow-hidden rounded-xl border border-white/10 shadow-2xl"
+      className="relative w-full overflow-hidden rounded-xl border border-white/10 shadow-2xl"
       style={{ background: '#0d1117', fontFamily: 'Cascadia Code, Consolas, monospace', height: isMobile ? 280 : DEMO_HEIGHT }}
     >
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: resultOpen ? '42% 58%' : '100% 0%',
+          gridTemplateColumns: !isMobile && resultOpen ? '42% 58%' : '100% 0%',
           transition: 'grid-template-columns 0.55s cubic-bezier(0.4,0,0.2,1)',
           height: isMobile ? 280 : DEMO_HEIGHT,
           overflow: 'hidden',
@@ -197,34 +217,34 @@ export default function TerminalDemo() {
           </div>
         </div>
 
-        {/* Result panel */}
+        {/* Desktop: 그리드 오른쪽 칼럼 */}
+        {!isMobile && (
+          <div
+            className="flex flex-col border-l border-white/10 overflow-hidden"
+            style={{
+              opacity: resultVisible ? 1 : 0,
+              transition: 'opacity 0.4s ease',
+            }}
+          >
+            {resultPanelInner}
+          </div>
+        )}
+      </div>
+
+      {/* Mobile: 터미널 위를 덮는 오버레이 */}
+      {isMobile && resultOpen && (
         <div
-          className="flex flex-col border-l border-white/10 overflow-hidden"
+          className="absolute inset-0 flex flex-col"
           style={{
+            background: '#0d1117',
             opacity: resultVisible ? 1 : 0,
+            pointerEvents: resultVisible ? 'auto' : 'none',
             transition: 'opacity 0.4s ease',
           }}
         >
-          {/* Browser chrome */}
-          <div className="flex items-center gap-2 border-b border-white/10 bg-zinc-800/60 px-3 py-2 shrink-0">
-            <div className="flex gap-1.5">
-              <span className="h-2.5 w-2.5 rounded-full bg-red-500/70" />
-              <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
-              <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/70" />
-            </div>
-            <div className="flex-1 rounded bg-zinc-700/60 px-3 py-1 text-[10px] text-zinc-400 truncate">
-              {resultLabel.address}
-            </div>
-          </div>
-
-          {/* Content area */}
-          <div className="relative flex-1 overflow-hidden">
-            {sceneIndex === 0 && <PortfolioGridPanel />}
-            {sceneIndex === 1 && <WritingPanel />}
-            {sceneIndex === 2 && <DrawingPanel />}
-          </div>
+          {resultPanelInner}
         </div>
-      </div>
+      )}
     </div>
   )
 }
