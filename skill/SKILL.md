@@ -26,6 +26,34 @@ allowed-tools:
 
 ## Preamble (run first)
 
+### Step 0 — 버전 체크 (업데이트 확인)
+
+1. 로컬 버전 읽기: `cat ~/.claude/skills/claude-guide/VERSION 2>/dev/null || echo "unknown"`
+2. 원격 버전 가져오기: WebFetch로 `https://raw.githubusercontent.com/lumatic2/claude-code-guide/master/skill/VERSION` (실패하면 조용히 통과하고 Step 1로)
+3. 두 값이 **다르면** AskUserQuestion (header: "업데이트"):
+   > 가이드 스킬 새 버전이 있어요 (로컬 {로컬버전} → 최신 {원격버전}).
+   >
+   > 추천: A — 먼저 업데이트하고 진행하면 최신 트랙을 쓸 수 있어요.
+   >
+   > - A) 업데이트 후 진행
+   > - B) 이번 세션은 현재 버전으로 진행
+   > - C) 다음에 묻기 (이번 달 안 물어봄)
+
+   - **A 선택** → 다음 메시지 출력하고 종료:
+     ```
+     ⟳ UPDATE
+
+     Claude Code 입력창에 아래를 붙여넣어 업데이트 후 /claude-guide 다시 실행하세요:
+
+     lumatic2/claude-code-guide 레포의 skill/ 폴더를 ~/.claude/skills/claude-guide/ 에 설치해줘. 이미 있으면 최신으로 업데이트해줘.
+     ```
+   - **B 선택** → Step 1로 진행 (알림 없음)
+   - **C 선택** → `touch ~/.claude-guide/.skip-update-check-$(date +%Y-%m)` 하고 Step 1로. 다음 호출부터 이 파일이 있으면 Step 0 전체 스킵.
+
+4. 같거나 네트워크 실패 → Step 1로.
+
+### Step 1 — 진행 상태 확인
+
 ```bash
 mkdir -p ~/.claude-guide
 if [ -f ~/.claude-guide/progress.json ]; then
