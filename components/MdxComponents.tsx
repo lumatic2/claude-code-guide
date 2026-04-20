@@ -2,6 +2,7 @@ import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import StepCard from "@/components/StepCard";
 import Callout from "@/components/Callout";
 import CodeBlock from "@/components/CodeBlock";
+import ZoomImage from "@/components/ZoomImage";
 
 function Table({
   className,
@@ -47,5 +48,6 @@ export const baseComponents = {
   StepCard,
   Callout,
   CodeBlock,
+  ZoomImage,
   pre: Pre,
 };
