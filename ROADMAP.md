@@ -65,7 +65,12 @@
 
 - [ ] AskUserQuestion에서 사용자가 "명확화" 요청 시 재질문 플로우 정돈
 - [ ] 실제 강의 1회 예행 후 수강자 피드백 반영
-- [ ] Lv 2/3 reference 실사용 후 부족한 지점 보강
+- [ ] **레벨 재설계 (2026-04-20)** — 3단계 → 5단계(+확장)로 확장. `CURRICULUM.md` 기준:
+  - [ ] Lv 2 재작성: `level-2-sandbox.md` → `level-2-claude-md.md` (앱만으로 완수, CLAUDE.md 감각 집중)
+  - [ ] Lv 3 신설: `level-3-terminal.md` (proj 함수 + ROADMAP.md + 터미널 전환, ai-usage-widget/workspace-pulse-dashboard 소개)
+  - [ ] Lv 4 신설: `level-4-git.md` (git init + GitHub 푸시)
+  - [ ] Lv 5: `level-3-skill.md` → `level-5-skill.md` 개명
+  - [ ] SKILL.md에 `CURRENT_MAX_LEVEL` 도입, Phase 2-RETURNING 분기 갱신
 - [ ] 템플릿 실전 사용 후 편차 큰 분위기(과감한/개성있는) 추가 고려
 - [ ] 모바일 TerminalDemo 일시정지 UX 실사용 피드백 확인 후 다듬기
 - [ ] SideNav 햄버거 드로어 사용 데이터 수집 → 필요 시 하단 탭바로 재평가
