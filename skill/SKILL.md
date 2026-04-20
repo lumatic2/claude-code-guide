@@ -45,7 +45,13 @@ allowed-tools:
 
      Claude Code 입력창에 아래를 붙여넣어 업데이트 후 /claude-guide 다시 실행하세요:
 
-     lumatic2/claude-code-guide 레포의 skill/ 폴더를 ~/.claude/skills/claude-guide/ 에 설치해줘. 이미 있으면 최신으로 업데이트해줘.
+     아래 명령을 실행해 Claude Code 가이드 스킬을 설치해줘:
+
+     git clone --depth 1 https://github.com/lumatic2/claude-code-guide ~/.ccg-install
+     rm -rf ~/.claude/skills/claude-guide
+     mkdir -p ~/.claude/skills
+     mv ~/.ccg-install/skill ~/.claude/skills/claude-guide
+     rm -rf ~/.ccg-install
      ```
    - **B 선택** → Step 1로 진행 (알림 없음)
    - **C 선택** → `touch ~/.claude-guide/.skip-update-check-$(date +%Y-%m)` 하고 Step 1로. 다음 호출부터 이 파일이 있으면 Step 0 전체 스킵.
