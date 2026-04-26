@@ -1,13 +1,13 @@
 # Claude Code Guide — Roadmap
 
 > 가이드 사이트(`guide.askewly.com`)와 `/claude-guide` 스킬의 유지·개선 작업 추적.
-> 마지막 업데이트: 2026-04-20
+> 마지막 업데이트: 2026-04-26
 
 ## 현재 상태
 
 - 사이트: Vercel 프로덕션 배포, Cloudflare 서브도메인 `guide.askewly.com` 연결
 - 콘텐츠: `intro`, `setup`, `basics`, `workflows`, `advanced`, `tips`, `cheatsheet` 7개 MDX
-- 스킬: `/claude-guide` 3단계 온보딩 (Lv 1 트랙 4개 + Lv 2 샌드박스 + Lv 3 나만의 스킬)
+- 스킬: `/claude-guide` 5단계 온보딩 (Lv 1 트랙 4개 → Lv 2 CLAUDE.md 감각 → Lv 3 터미널 전환 → Lv 4 git/GitHub → Lv 5 나만의 스킬). CURRENT_MAX_LEVEL=5
 
 ## 완료
 
@@ -61,21 +61,40 @@
 - [x] 본문 상단 여백 `py-6` → `py-8`, 터미널 데모 ⏸/▶ 버튼, 결과 패널 `resultOpen` 시점 지연 마운트로 SSR 플래시·iframe 선로딩 해결 (`30438be`)
 - [x] step2·step3 스크린샷 재촬영(저해상도 원본) + 여백 크롭 + 2× 업스케일 (`18dfa8b`)
 
+### AI 실무 커리큘럼 v1 작성 (2026-04-26)
+- [x] `docs/curriculum/` 디렉토리 신설 — 외부 강의·개인 과외용 단일 소스
+- [x] **두 트랙 분리 설계** — 3시간 강의(콘텐츠 전수: 감각·충격·첫 시도)와 4주 과외(메타-스킬 전수: 학습 시스템 자체)는 목적이 다르므로 골격도 다름. 압축본 관계 아님
+- [x] `README.md` — 두 트랙 목적 차이 + 공유 자산(용어집·데모 자산·1차 출처) + 트랙별 차시 구조
+- [x] `4-week-tutoring.md` — **메타-스킬 중심 재설계**. 4주 = 첫 모델 잡기 → 정보 시스템 → 평가 프레임워크 → 통합 사이클. 코칭형 4단 구조(이번 주 질문 / 함께 탐색 / 혼자 한 번 더 / 자기 사이클)
+- [x] `3-hour-lecture.md` — 감각 전수형 3단 구조(개념 10분 / 데모 30분 / 액션+Q&A 10분). "자주 하는 실수" 섹션 제거
+- [x] `glossary.md` — 4파트 용어집 + 모델별 한 줄 요약 + 약어 (두 트랙 공유 자산)
+- [x] **Notion 업로드 (2026-04-26)** — "허브" 페이지 아래 4개 페이지 트리 publish:
+  - 인덱스: https://www.notion.so/AI-34eab03d352581f98893d285c6af2c4b
+  - 4주 과외: https://www.notion.so/4-34eab03d352581b0a7b4d4c537b72f14
+  - 3시간 강의: https://www.notion.so/3-34eab03d3525818b81e9e4fc6612a26c
+  - 용어집: https://www.notion.so/34eab03d3525817f8b3bd9daa08146d2
+
 ## 다음에 할 일
 
+- [ ] **커리큘럼 1차 예행**: 3시간 강의 트랙으로 자체 리허설 1회 → 부족한 데모/넘치는 분량 식별 → `## 강의 노트` 섹션에 누적
+- [ ] **커리큘럼 사이트 통합 검토**: 2~3회 실제 강의 후 사이트 `/curriculum` 새 섹션으로 추가 여부 결정 (현재는 MD only)
 - [ ] AskUserQuestion에서 사용자가 "명확화" 요청 시 재질문 플로우 정돈
 - [ ] 실제 강의 1회 예행 후 수강자 피드백 반영
-- [ ] **레벨 재설계 (2026-04-20)** — 3단계 → 5단계(+확장)로 확장. `CURRICULUM.md` 기준:
-  - [ ] Lv 2 재작성: `level-2-sandbox.md` → `level-2-claude-md.md` (앱만으로 완수, CLAUDE.md 감각 집중)
-  - [ ] Lv 3 신설: `level-3-terminal.md` (proj 함수 + ROADMAP.md + 터미널 전환, ai-usage-widget/workspace-pulse-dashboard 소개)
-  - [ ] Lv 4 신설: `level-4-git.md` (git init + GitHub 푸시)
-  - [ ] Lv 5: `level-3-skill.md` → `level-5-skill.md` 개명
-  - [ ] SKILL.md에 `CURRENT_MAX_LEVEL` 도입, Phase 2-RETURNING 분기 갱신
+- [x] **레벨 재설계 (2026-04-20)** — 3단계 → 5단계(+확장)로 확장. `CURRICULUM.md` 기준:
+  - [x] Lv 2 재작성: `level-2-sandbox.md` → `level-2-claude-md.md` (앱만으로 완수, CLAUDE.md 감각 집중)
+  - [x] Lv 3 신설: `level-3-terminal.md` (proj 함수 + ROADMAP.md + 터미널 전환, ai-usage-widget/workspace-pulse-dashboard 소개)
+  - [x] Lv 4 신설: `level-4-git.md` (git init + GitHub 푸시)
+  - [x] Lv 5: `level-3-skill.md` → `level-5-skill.md` 개명
+  - [x] SKILL.md에 `CURRENT_MAX_LEVEL` 도입, Phase 2-RETURNING 분기 갱신
+  - [x] 공통 프로토콜에 progress.json 자동 청소 + 가정 모드(dry-run) 추가
+- [ ] Lv 2 실사용 테스트에서 발견된 엣지 개선 잔여 — Lv 1 artifact 존재 확인 로직을 Lv 1 트랙에도 선반영, `CURRENT_MAX_LEVEL` 기반 소개 문구 동적화
 - [ ] 템플릿 실전 사용 후 편차 큰 분위기(과감한/개성있는) 추가 고려
 - [ ] 모바일 TerminalDemo 일시정지 UX 실사용 피드백 확인 후 다듬기
 - [ ] SideNav 햄버거 드로어 사용 데이터 수집 → 필요 시 하단 탭바로 재평가
 
 ## 이어서 할 일
 
-- 모바일 최적화 1차 완료. 실사용자(모바일)에게 URL 공유 후 피드백 수집 → `/guide/setup`, `/guide/basics` 등에서 병목 추가 발굴.
-- 또는 강의 예행용 스크립트 준비(Lv 1 시연 흐름) 시작 가능.
+- 다음 세션 첫 행동: **3시간 강의 자체 리허설 1회**. 데모 시나리오·분량 검증 → `3-hour-lecture.md` 하단 강의 노트에 첫 회차 기록 + Notion 페이지에도 동기화.
+- 병행: **4주 과외 1회차 가상 시뮬레이션** — 학습자 1명을 가정해 W1 함께 탐색 시연 흐름 점검. 막히는 지점 메모.
+- 병행: **Lv 3 실사용 테스트**. `~/.claude-guide/progress.json`의 `level`을 `2`로 유지한 상태에서 `/claude-guide` 호출 → Lv 3 진입 분기 확인 → `~/projects/porza/ROADMAP.md` 생성 + proj 함수 프로파일 append 검증. 이후 Lv 4(git/GitHub) 실사용 테스트.
+- 테스트 중 Lv 1 소개 문구의 "Lv 1~5" 하드코딩을 `CURRENT_MAX_LEVEL` 기반으로 동적 표시하도록 개선(잔여 항목).
