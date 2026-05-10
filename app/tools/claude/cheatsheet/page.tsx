@@ -9,7 +9,7 @@ import PrintButton from "@/components/PrintButton";
 const components = { ...baseComponents, Callout };
 
 export default function CheatsheetPage() {
-  const filePath = path.join(process.cwd(), "content", "cheatsheet.mdx");
+  const filePath = path.join(process.cwd(), "content", "tools", "claude", "cheatsheet.mdx");
   const source = readFileSync(filePath, "utf-8");
   return (
     <div>

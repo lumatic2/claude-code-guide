@@ -17,7 +17,7 @@ const components = {
 };
 
 export default function TipsPage() {
-  const filePath = path.join(process.cwd(), "content", "tips.mdx");
+  const filePath = path.join(process.cwd(), "content", "tools", "claude", "tips.mdx");
   const source = readFileSync(filePath, "utf-8");
   return (
     <>
@@ -28,7 +28,7 @@ export default function TipsPage() {
         options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
       />
     </article>
-    <DocNav current="/guide/tips" />
+    <DocNav current="/tools/claude/tips" />
     </>
   );
 }

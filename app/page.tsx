@@ -35,7 +35,7 @@ export default function Home() {
           <span className="sm:hidden"> </span>글쓰기 · 디자인 · 음악 · 시스템 설계
         </p>
         <Link
-          href="/guide/setup"
+          href="/tools/claude/setup"
           className="mt-2 inline-flex items-center gap-2 rounded-full bg-zinc-50 px-7 py-3 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-200"
         >
           입문 가이드 시작하기 →

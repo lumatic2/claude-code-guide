@@ -2,7 +2,7 @@
 
 Claude Code 입문자를 위한 가이드 웹사이트 + 인터랙티브 학습 스킬.
 
-**가이드 사이트**: https://guide.askewly.com
+**가이드 사이트**: https://learn.askewly.com/tools/claude
 
 ---
 

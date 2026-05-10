@@ -1,13 +1,41 @@
-# Claude Code Guide — Roadmap
+# AI Curriculum (구 Claude Code Guide) — Roadmap
 
-> 가이드 사이트(`guide.askewly.com`)와 `/claude-guide` 스킬의 유지·개선 작업 추적.
-> 마지막 업데이트: 2026-04-26
+> AI 교육 허브(`learn.askewly.com`)로 확장 중. Claude Code 가이드는 `/tools/claude/*` 트랙으로 편입.
+> 마지막 업데이트: 2026-05-11
 
 ## 현재 상태
 
-- 사이트: Vercel 프로덕션 배포, Cloudflare 서브도메인 `guide.askewly.com` 연결
-- 콘텐츠: `intro`, `setup`, `basics`, `workflows`, `advanced`, `tips`, `cheatsheet` 7개 MDX
+- 사이트: Vercel 프로덕션 배포
+  - 신규 도메인 `learn.askewly.com` (허브)
+  - 기존 `guide.askewly.com` → `learn.askewly.com/tools/claude` 308 redirect (Vercel domain redirect, 인프라 작업 별도)
+- 트리: `/tools/claude/{intro,setup,basics,advanced,workflows,tips,cheatsheet}` 7개 MDX
 - 스킬: `/claude-guide` 5단계 온보딩 (Lv 1 트랙 4개 → Lv 2 CLAUDE.md 감각 → Lv 3 터미널 전환 → Lv 4 git/GitHub → Lv 5 나만의 스킬). CURRENT_MAX_LEVEL=5
+
+## AI 교육 허브 마이그레이션 (2026-05-11)
+
+전체 기획: Claude Code 단일 가이드 → AI 종합 교육 허브로 확장. 하위 트랙으로 LLM 기초·프롬프트/컨텍스트/하네스 엔지니어링·도구별(Claude/ChatGPT/Gemini).
+
+### Phase 1 — 트리 재배치 (진행 중, 2026-05-11)
+- [x] `app/guide/*`, `app/cheatsheet` → `app/tools/claude/*`로 git mv
+- [x] `content/*.mdx` → `content/tools/claude/*.mdx`
+- [x] 각 page.tsx의 readFileSync 경로 + DocNav `current` prop 갱신
+- [x] SideNav, DocNav, 랜딩의 `/guide/*`·`/cheatsheet` href 갱신
+- [x] MDX 내부 링크 3건 갱신 (setup·basics·advanced)
+- [x] `next.config.ts`에 `/guide/:path*` → `/tools/claude/:path*` + `/cheatsheet` 308 redirect (백업용 internal)
+- [x] 외부 문서 도메인 갱신 (README, install.sh, skill/SKILL.md, level-3-skill.md)
+- [ ] 빌드 검증
+- [ ] 인프라 (사용자 작업): Cloudflare DNS `learn` CNAME → vercel-dns + Vercel Domains에 `learn.askewly.com` 추가, 기존 `guide.askewly.com`은 `learn.askewly.com/tools/claude`로 redirect 설정
+- [ ] 레포 rename (`claude-code-guide` → `ai-curriculum`) — 인프라 안정화 후
+
+### Phase 2 — 허브 골격 (예정)
+- [ ] 랜딩 재설계: 트랙 카탈로그 (foundations / prompt / context / harness / tools)
+- [ ] `app/tools/page.tsx` (Claude/ChatGPT/Gemini 카드)
+- [ ] SideNav 2단 구조 (트랙 선택 → 트랙 내 목차)
+- [ ] 빈 트랙 placeholder 페이지
+
+### Phase 3 — 콘텐츠 이식 (예정)
+- [ ] foundations / prompt-engineering / context-engineering / harness-engineering MDX
+- [ ] 4주 과외·3시간 강의 콘텐츠를 트랙에 매핑
 
 ## 완료
 
@@ -94,7 +122,7 @@
 
 ## 이어서 할 일
 
-- 다음 세션 첫 행동: **3시간 강의 자체 리허설 1회**. 데모 시나리오·분량 검증 → `3-hour-lecture.md` 하단 강의 노트에 첫 회차 기록 + Notion 페이지에도 동기화.
-- 병행: **4주 과외 1회차 가상 시뮬레이션** — 학습자 1명을 가정해 W1 함께 탐색 시연 흐름 점검. 막히는 지점 메모.
+- 다음 세션 첫 행동: **다음 주 실제 학생 과외 회차 결과 회고**. 비-개발자 학생, 3주차에 결과물 0건·skills 미인지 상태로 진단됨 → 다음 회차에 "손에 잡히는 결과물 1개" 원칙 재적용 (작은 게임/과제/AI 궁금증 중 학생 선택). 결과 보고 후 `docs/curriculum/4-week-tutoring.md`에 "매 차시 결과물 1개" 원칙 보강 여부 결정.
+- 병행: **3시간 강의 자체 리허설 1회** — 데모 시나리오·분량 검증 → `3-hour-lecture.md` 하단 강의 노트에 첫 회차 기록 + Notion 페이지 동기화.
 - 병행: **Lv 3 실사용 테스트**. `~/.claude-guide/progress.json`의 `level`을 `2`로 유지한 상태에서 `/claude-guide` 호출 → Lv 3 진입 분기 확인 → `~/projects/porza/ROADMAP.md` 생성 + proj 함수 프로파일 append 검증. 이후 Lv 4(git/GitHub) 실사용 테스트.
 - 테스트 중 Lv 1 소개 문구의 "Lv 1~5" 하드코딩을 `CURRENT_MAX_LEVEL` 기반으로 동적 표시하도록 개선(잔여 항목).

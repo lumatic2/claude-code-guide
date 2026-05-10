@@ -16,8 +16,8 @@ const components = {
   pre: ({ children }: any) => <CodeBlock>{children}</CodeBlock>,
 };
 
-export default function BasicsPage() {
-  const filePath = path.join(process.cwd(), "content", "basics.mdx");
+export default function IntroPage() {
+  const filePath = path.join(process.cwd(), "content", "tools", "claude", "intro.mdx");
   const source = readFileSync(filePath, "utf-8");
   return (
     <>
@@ -28,7 +28,7 @@ export default function BasicsPage() {
         options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
       />
     </article>
-    <DocNav current="/guide/basics" />
+    <DocNav current="/tools/claude/intro" />
     </>
   );
 }

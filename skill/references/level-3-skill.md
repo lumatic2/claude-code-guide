@@ -154,6 +154,6 @@ Lv 3 완료. Claude Code 온보딩 끝났어요.
   · 필요한 도구를 스스로 만들 수 있어요
 
 다음은 본인이 하고 싶은 프로젝트로 자유롭게 가세요.
-  · 더 배우고 싶으면: https://guide.askewly.com
+  · 더 배우고 싶으면: https://learn.askewly.com/tools/claude
   · 공식 문서: https://code.claude.com/docs
 ```

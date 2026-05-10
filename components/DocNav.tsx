@@ -1,13 +1,13 @@
 import Link from "next/link";
 
 const pages = [
-  { href: "/guide/setup", label: "설치 가이드" },
-  { href: "/guide/intro", label: "입문 소개" },
-  { href: "/guide/basics", label: "기본 사용법" },
-  { href: "/guide/advanced", label: "고급 설정" },
-  { href: "/guide/workflows", label: "실전 워크플로우" },
-  { href: "/guide/tips", label: "실전 팁 · FAQ" },
-  { href: "/cheatsheet", label: "치트시트" },
+  { href: "/tools/claude/setup", label: "설치 가이드" },
+  { href: "/tools/claude/intro", label: "입문 소개" },
+  { href: "/tools/claude/basics", label: "기본 사용법" },
+  { href: "/tools/claude/advanced", label: "고급 설정" },
+  { href: "/tools/claude/workflows", label: "실전 워크플로우" },
+  { href: "/tools/claude/tips", label: "실전 팁 · FAQ" },
+  { href: "/tools/claude/cheatsheet", label: "치트시트" },
 ];
 
 export default function DocNav({ current }: { current: string }) {

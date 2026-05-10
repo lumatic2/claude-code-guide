@@ -16,8 +16,8 @@ const components = {
   pre: ({ children }: any) => <CodeBlock>{children}</CodeBlock>,
 };
 
-export default function SetupPage() {
-  const filePath = path.join(process.cwd(), "content", "setup.mdx");
+export default function AdvancedPage() {
+  const filePath = path.join(process.cwd(), "content", "tools", "claude", "advanced.mdx");
   const source = readFileSync(filePath, "utf-8");
   return (
     <>
@@ -28,7 +28,7 @@ export default function SetupPage() {
         options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
       />
     </article>
-    <DocNav current="/guide/setup" />
+    <DocNav current="/tools/claude/advanced" />
     </>
   );
 }

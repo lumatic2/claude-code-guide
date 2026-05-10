@@ -17,7 +17,7 @@ const components = {
 };
 
 export default function WorkflowsPage() {
-  const filePath = path.join(process.cwd(), "content", "workflows.mdx");
+  const filePath = path.join(process.cwd(), "content", "tools", "claude", "workflows.mdx");
   const source = readFileSync(filePath, "utf-8");
   return (
     <>
@@ -28,7 +28,7 @@ export default function WorkflowsPage() {
         options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
       />
     </article>
-    <DocNav current="/guide/workflows" />
+    <DocNav current="/tools/claude/workflows" />
     </>
   );
 }

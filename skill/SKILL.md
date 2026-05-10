@@ -165,7 +165,7 @@ reference는 모두 **5단계 공통 스키마**를 따른다:
 >
 > 이 스킬을 다시 호출할 필요는 없지만, 새 트랙을 시도하고 싶거나 다른 사람에게
 > Claude Code를 알려줄 때 참고 자료로 쓰세요:
-> https://guide.askewly.com
+> https://learn.askewly.com/tools/claude
 
 추가 호출 시엔 Phase 1-NEW의 트랙 선택만 제공한다 (레벨 진행은 없음).
 
@@ -248,5 +248,5 @@ EOF
 
 ## 참고: 가이드 사이트
 
-더 자세한 레퍼런스는 https://guide.askewly.com 에서 볼 수 있다.
+더 자세한 레퍼런스는 https://learn.askewly.com/tools/claude 에서 볼 수 있다.
 세션 중에 개념 질문이 나오면 해당 페이지 링크를 함께 제공한다.
