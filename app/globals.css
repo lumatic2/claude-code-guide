@@ -3,6 +3,7 @@
 @plugin "@tailwindcss/typography";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "./theme.generated.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -117,6 +118,47 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+/* DESIGN.md → shadcn bridge (editorial family) */
+:root {
+  --background: var(--color-paper-50);
+  --foreground: var(--color-ink-900);
+  --card: var(--color-paper-50);
+  --card-foreground: var(--color-ink-900);
+  --popover: var(--color-paper-50);
+  --popover-foreground: var(--color-ink-900);
+  --primary: var(--color-accent-500);
+  --primary-foreground: var(--color-paper-50);
+  --secondary: var(--color-paper-100);
+  --secondary-foreground: var(--color-ink-900);
+  --muted: var(--color-paper-100);
+  --muted-foreground: var(--color-ink-700);
+  --accent: var(--color-accent-500);
+  --accent-foreground: var(--color-paper-50);
+  --border: var(--color-ink-700);
+  --input: var(--color-ink-700);
+  --ring: var(--color-accent-500);
+}
+
+.dark {
+  --background: var(--color-ink-900);
+  --foreground: var(--color-paper-50);
+  --card: var(--color-ink-900);
+  --card-foreground: var(--color-paper-50);
+  --popover: var(--color-ink-900);
+  --popover-foreground: var(--color-paper-50);
+  --primary: var(--color-accent-500);
+  --primary-foreground: var(--color-paper-50);
+  --secondary: var(--color-ink-700);
+  --secondary-foreground: var(--color-paper-50);
+  --muted: var(--color-ink-700);
+  --muted-foreground: var(--color-paper-100);
+  --accent: var(--color-accent-500);
+  --accent-foreground: var(--color-paper-50);
+  --border: var(--color-ink-700);
+  --input: var(--color-ink-700);
+  --ring: var(--color-accent-500);
 }
 
 @layer base {
