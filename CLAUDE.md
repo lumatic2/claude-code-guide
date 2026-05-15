@@ -1,6 +1,9 @@
-# Claude Code Guide
+# AI Curriculum (구 Claude Code Guide)
 
-> Claude Code 입문자를 위한 개념 설명·실습 예제·치트시트 가이드 웹사이트
+> **AI 교육 허브** (`learn.askewly.com`) — 도구별·역량별 입문 트랙 모음.
+> Claude Code 가이드에서 출발해 ChatGPT·Gemini·MS365 등 도구 트랙 + LLM 기초·프롬프트·컨텍스트·하네스 엔지니어링 역량 트랙으로 확장 중.
+>
+> 마이그레이션·다음 단계 상세는 `ROADMAP.md` (source of truth).
 
 ## 기술 스택
 
@@ -26,14 +29,17 @@
 
 ```
 /app
-  /             → 랜딩
-  /guide/intro  → Claude Code란?
-  /guide/setup  → 설치 & 첫 실행
-  /guide/basics → 핵심 사용법 + 실습
-  /cheatsheet   → 한 장 치트시트
-/content        → MDX 파일
-/components     → CodeBlock, StepCard, Callout, SideNav
+  /                   → 허브 랜딩 (Phase 2에서 트랙 카탈로그로 재설계 예정)
+  /tools/claude/*     → Claude Code 트랙 (intro·setup·basics·advanced·workflows·tips·cheatsheet)
+  /tools/ms365/*      → MS365 add-in 트랙 (intro·setup·basics·cheatsheet) — 2026-05-15 신설
+  /tools/page.tsx     → (Phase 2 예정) 도구별 카드 카탈로그
+/content/tools/{track}/*.mdx  → 트랙별 MDX
+/components           → CodeBlock, StepCard, Callout, SideNav, DocNav, ZoomImage
 ```
+
+**트랙 추가 패턴**: `app/tools/{track}/{page}/page.tsx` + `content/tools/{track}/{page}.mdx` + `app/tools/{track}/pages.ts` (DocNav prev/next 목록). SideNav 항목은 `components/SideNav.tsx`에 수동 추가 (Phase 2 자동화 예정).
+
+레거시 `/guide/:path*` 경로는 `next.config.ts`에서 `/tools/claude/:path*`로 308 redirect.
 
 ## 개발 명령어
 

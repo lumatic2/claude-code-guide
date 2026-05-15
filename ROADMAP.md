@@ -1,7 +1,7 @@
 # AI Curriculum (구 Claude Code Guide) — Roadmap
 
 > AI 교육 허브(`learn.askewly.com`)로 확장 중. Claude Code 가이드는 `/tools/claude/*` 트랙으로 편입.
-> 마지막 업데이트: 2026-05-11
+> 마지막 업데이트: 2026-05-15
 
 ## 현재 상태
 
@@ -23,14 +23,15 @@
 - [x] MDX 내부 링크 3건 갱신 (setup·basics·advanced)
 - [x] `next.config.ts`에 `/guide/:path*` → `/tools/claude/:path*` + `/cheatsheet` 308 redirect (백업용 internal)
 - [x] 외부 문서 도메인 갱신 (README, install.sh, skill/SKILL.md, level-3-skill.md)
-- [ ] 빌드 검증
+- [x] 빌드 검증 (`pnpm build` 통과, 11페이지 정적 생성, commit `1653935`)
 - [ ] 인프라 (사용자 작업): Cloudflare DNS `learn` CNAME → vercel-dns + Vercel Domains에 `learn.askewly.com` 추가, 기존 `guide.askewly.com`은 `learn.askewly.com/tools/claude`로 redirect 설정
 - [ ] 레포 rename (`claude-code-guide` → `ai-curriculum`) — 인프라 안정화 후
 
 ### Phase 2 — 허브 골격 (예정)
+- [x] **MS365 트랙 신설 (2026-05-15, `2234649` + `e5b44dc`)** — `/tools/ms365/{intro,setup,basics,cheatsheet}` 4페이지. Excel/Word/PPT 묶음 add-in 설치·로그인·첫 프롬프트. Marketplace vs claude.ai/downloads 구분 명시. DocNav을 `pages` prop으로 일반화, SideNav에 임시 `[MS365] *` 라벨로 4개 추가
 - [ ] 랜딩 재설계: 트랙 카탈로그 (foundations / prompt / context / harness / tools)
-- [ ] `app/tools/page.tsx` (Claude/ChatGPT/Gemini 카드)
-- [ ] SideNav 2단 구조 (트랙 선택 → 트랙 내 목차)
+- [ ] `app/tools/page.tsx` (Claude/ChatGPT/Gemini/MS365 카드)
+- [ ] SideNav 2단 구조 (트랙 선택 → 트랙 내 목차) — `[MS365] *` prefix 임시 라벨 정리
 - [ ] 빈 트랙 placeholder 페이지
 
 ### Phase 3 — 콘텐츠 이식 (예정)
@@ -120,9 +121,3 @@
 - [ ] 모바일 TerminalDemo 일시정지 UX 실사용 피드백 확인 후 다듬기
 - [ ] SideNav 햄버거 드로어 사용 데이터 수집 → 필요 시 하단 탭바로 재평가
 
-## 이어서 할 일
-
-- 다음 세션 첫 행동: **다음 주 실제 학생 과외 회차 결과 회고**. 비-개발자 학생, 3주차에 결과물 0건·skills 미인지 상태로 진단됨 → 다음 회차에 "손에 잡히는 결과물 1개" 원칙 재적용 (작은 게임/과제/AI 궁금증 중 학생 선택). 결과 보고 후 `docs/curriculum/4-week-tutoring.md`에 "매 차시 결과물 1개" 원칙 보강 여부 결정.
-- 병행: **3시간 강의 자체 리허설 1회** — 데모 시나리오·분량 검증 → `3-hour-lecture.md` 하단 강의 노트에 첫 회차 기록 + Notion 페이지 동기화.
-- 병행: **Lv 3 실사용 테스트**. `~/.claude-guide/progress.json`의 `level`을 `2`로 유지한 상태에서 `/claude-guide` 호출 → Lv 3 진입 분기 확인 → `~/projects/porza/ROADMAP.md` 생성 + proj 함수 프로파일 append 검증. 이후 Lv 4(git/GitHub) 실사용 테스트.
-- 테스트 중 Lv 1 소개 문구의 "Lv 1~5" 하드코딩을 `CURRENT_MAX_LEVEL` 기반으로 동적 표시하도록 개선(잔여 항목).
