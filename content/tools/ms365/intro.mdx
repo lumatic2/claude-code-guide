@@ -1,0 +1,60 @@
+import Callout from "@/components/Callout";
+
+# MS Office 안에서 Claude 쓰기
+
+> **Excel · Word · PowerPoint를 평소처럼 열고, 옆에 Claude를 띄워서 같이 작업한다.**
+
+Anthropic이 공식으로 제공하는 **Microsoft 365 add-in**을 설치하면, 익숙한 Office 화면 오른쪽에 Claude 사이드바가 나타납니다. 파일을 따로 업로드하거나 복사·붙여넣기를 할 필요가 없어요. 지금 열어둔 워크북·문서·슬라이드를 Claude가 직접 읽고, 편집까지 합니다.
+
+<Callout type="info">
+이 가이드는 **Excel · Word · PowerPoint 묶음 add-in** 설치를 다룹니다. Outlook용은 별도 add-in(베타)이며 추후 추가할 예정입니다.
+</Callout>
+
+## 챗봇에 붙여넣기 vs Office add-in
+
+| | claude.ai에 복사·붙여넣기 | MS365 add-in |
+|---|---|---|
+| 파일 위치 | 매번 업로드 | 지금 열려 있는 파일 그대로 |
+| 작업 결과 | 채팅창 텍스트 | Excel 셀·Word 본문에 직접 반영 |
+| 컨텍스트 | 매번 다시 설명 | Claude가 시트·문서 구조를 직접 읽음 |
+| 적합 작업 | 일반 질문, 글쓰기 보조 | 모델링, 보고서 편집, 슬라이드 제작 |
+
+## 무엇을 할 수 있나
+
+### Excel
+- "이 셀의 수식이 뭘 계산하는지 설명해줘"
+- "WACC 가정값을 9%로 바꾸고 DCF 모델 다시 돌려줘"
+- "이 거래내역에서 월별 카테고리 합계 시트 만들어줘"
+
+### Word
+- "이 보고서 어조를 더 격식있게, 변경 추적(track changes) 켠 채로 다듬어줘"
+- "댓글 스레드에 달린 피드백 반영해서 3장만 다시 써줘"
+- "회사 스타일 가이드대로 제목·소제목 스타일 통일해줘"
+
+### PowerPoint
+- "이 템플릿으로 5장짜리 분기 실적 슬라이드 만들어줘"
+- "이 표를 네이티브 차트로 바꿔줘"
+- "선택한 슬라이드만 폰트 크기·여백 일관되게 정리해줘"
+
+## 누가 쓸 수 있나
+
+- **유료 Claude 계정 필수** — Pro · Max · Team · Enterprise (무료 플랜 사용 불가)
+- add-in 자체는 Microsoft Marketplace에서 무료
+- Excel · Word · PowerPoint는 정식 출시(GA), Outlook은 베타
+
+<Callout type="tip">
+회사에서 쓴다면 Team/Enterprise 관리자가 먼저 권한을 열어줘야 할 수 있습니다. 자세한 건 [설치 가이드](./setup)에서 다룹니다.
+</Callout>
+
+## 학습 순서
+
+1. **[설치 가이드](./setup)** — Marketplace에서 add-in 설치 → 로그인 (5분)
+2. **[첫 사용법](./basics)** — Excel·Word·PowerPoint별 첫 프롬프트
+3. **[치트시트](./cheatsheet)** — 자주 쓰는 프롬프트 한 장 정리
+
+---
+
+## 더 읽기
+
+- 공식 소개: [claude.com/claude-for-microsoft-365](https://claude.com/claude-for-microsoft-365)
+- Microsoft 365 앱 통합 안내: [support.claude.com — Work across Microsoft 365 apps](https://support.claude.com/en/articles/13892150-work-across-microsoft-365-apps)

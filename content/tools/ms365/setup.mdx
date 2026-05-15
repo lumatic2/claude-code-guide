@@ -1,0 +1,125 @@
+import Callout from "@/components/Callout";
+
+# 설치 가이드
+
+> Microsoft 365 add-in 설치 → 로그인까지 5분 안에 끝납니다.
+
+## 시작 전 체크
+
+| 항목 | 필요 조건 |
+|---|---|
+| Claude 계정 | **유료 플랜** (Pro $20 / Max $100 / Team / Enterprise) |
+| Office 버전 | Excel Web / Windows 16.0.13127.20296+ / Mac 16.46+ / iPad 2.51+ |
+| Microsoft 계정 | 개인 또는 회사 Microsoft 365 로그인 |
+| 권한 | (회사 계정인 경우) 관리자가 third-party add-in 설치를 허용해야 함 |
+
+<Callout type="warn">
+무료 Claude 계정으로는 add-in 로그인이 되지 않습니다. 먼저 [claude.com/upgrade](https://claude.com/upgrade)에서 Pro 이상으로 업그레이드하세요.
+</Callout>
+
+---
+
+## 1. Marketplace에서 add-in 설치
+
+<div className="space-y-10 mt-8">
+
+<div className="space-y-2">
+  <div className="flex items-center gap-3">
+    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-sm">1</div>
+    <p className="text-base font-semibold text-white">Microsoft Marketplace 열기</p>
+  </div>
+  <div className="pl-11 text-zinc-400">
+    <p>Excel·Word·PowerPoint를 한 번에 활성화하는 묶음 add-in 페이지로 이동:</p>
+    <p className="mt-2"><a href="https://marketplace.microsoft.com/en-us/product/office/wa200010725" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">marketplace.microsoft.com — Claude for Microsoft 365</a></p>
+  </div>
+</div>
+
+<div className="space-y-2">
+  <div className="flex items-center gap-3">
+    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-sm">2</div>
+    <p className="text-base font-semibold text-white">"Get it now" 클릭</p>
+  </div>
+  <div className="pl-11 text-zinc-400">
+    <p>Microsoft 계정으로 로그인하라는 화면이 뜨면 평소 Office에서 쓰는 계정으로 로그인합니다. add-in 자체는 무료.</p>
+  </div>
+</div>
+
+<div className="space-y-2">
+  <div className="flex items-center gap-3">
+    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-sm">3</div>
+    <p className="text-base font-semibold text-white">설치 완료 후 Office 앱 실행</p>
+  </div>
+  <div className="pl-11 text-zinc-400">
+    <p>설치가 끝났다는 메시지가 뜨면 Excel(또는 Word·PowerPoint)을 직접 열어주세요. add-in 사이드바는 앱을 다시 열어야 나타납니다.</p>
+  </div>
+</div>
+
+</div>
+
+---
+
+## 2. add-in 활성화
+
+설치만으로는 사이드바가 자동으로 뜨지 않습니다. 첫 사용 시 한 번 활성화해야 합니다.
+
+| 운영체제 | 메뉴 위치 |
+|---|---|
+| **Windows** | 상단 리본 → **홈(Home)** → **추가 기능(Add-ins)** → **Claude** |
+| **Mac** | 상단 메뉴 → **도구(Tools)** → **추가 기능(Add-ins)** → **Claude** |
+| **Web (브라우저)** | 상단 리본 → **홈** → **추가 기능** → **Claude** |
+
+Claude를 클릭하면 화면 오른쪽에 사이드바가 열립니다.
+
+<Callout type="tip">
+**한 번 활성화하면 이후엔 자동으로 사이드바가 따라옵니다.** 단, Excel · Word · PowerPoint 각 앱마다 처음 한 번씩 활성화해야 합니다.
+</Callout>
+
+---
+
+## 3. Claude 계정으로 로그인
+
+사이드바가 열리면 Claude 로그인 화면이 보입니다.
+
+1. **Sign in** 버튼 클릭
+2. 브라우저가 열리면서 claude.com 로그인 페이지로 이동
+3. 평소 쓰는 Claude 계정(유료 플랜)으로 로그인
+4. **Authorize** 클릭 → Office 앱 사이드바로 자동 복귀
+
+로그인이 끝나면 사이드바 안에 채팅창이 나타나고, Claude가 현재 열린 파일을 인식합니다.
+
+---
+
+## 4. 잘 됐는지 확인
+
+Excel을 열고 사이드바에 다음을 입력해보세요:
+
+```
+지금 열려 있는 시트 구조를 한 줄로 요약해줘.
+```
+
+Claude가 시트 이름·열 헤더를 짚어가며 답하면 정상 설치된 겁니다.
+
+---
+
+## 안 될 때
+
+| 증상 | 해결 |
+|---|---|
+| 추가 기능 메뉴에 Claude가 없음 | Office 앱 완전히 종료 후 재실행 / Office 버전이 위 표 요건 이상인지 확인 |
+| "관리자 권한이 필요" 메시지 | 회사 계정인 경우 — IT 관리자에게 Microsoft 365 Admin Center에서 third-party add-in 허용 요청 |
+| 로그인 후 사이드바가 비어 있음 | Claude 계정이 **유료 플랜**인지 확인. 무료는 차단됨 |
+| 파일을 인식 못 함 | 사이드바 새로고침 아이콘 → 그래도 안 되면 파일을 한 번 저장(Ctrl+S) 후 재시도 |
+
+---
+
+## 다음 단계
+
+- **[첫 사용법](./basics)** — Excel · Word · PowerPoint별 첫 프롬프트 모음
+- **[치트시트](./cheatsheet)** — 자주 쓰는 프롬프트 한 장 요약
+
+---
+
+## 더 읽기
+
+- 공식 설치 가이드 (Excel): [support.claude.com — Use Claude for Excel](https://support.claude.com/en/articles/12650343-use-claude-for-excel)
+- 앱 간 연동 설정: [support.claude.com — Work across Microsoft 365 apps](https://support.claude.com/en/articles/13892150-work-across-microsoft-365-apps)

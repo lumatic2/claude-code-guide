@@ -1,0 +1,81 @@
+import Callout from "@/components/Callout";
+
+# 치트시트
+
+> 한 장으로 보는 MS365 Claude add-in 핵심.
+
+## 설치 한 줄 요약
+
+| 단계 | 내용 |
+|---|---|
+| 1 | [Marketplace](https://marketplace.microsoft.com/en-us/product/office/wa200010725)에서 **Get it now** |
+| 2 | Excel/Word/PPT 실행 → **홈 > 추가 기능 > Claude** (Mac은 도구 > 추가 기능) |
+| 3 | 사이드바에서 **Sign in** → 유료 Claude 계정으로 로그인 |
+
+## 요건
+
+- Claude **Pro / Max / Team / Enterprise** (무료 ❌)
+- Excel: Windows 16.0.13127.20296+ / Mac 16.46+ / Web / iPad 2.51+
+
+---
+
+## 자주 쓰는 프롬프트
+
+### Excel
+
+```
+이 시트 구조를 한 단락으로 요약해줘.
+선택한 셀의 수식이 뭘 계산하는지, 어떤 셀을 참조하는지 알려줘.
+B2의 할인율을 12%로 바꾸고 영향받는 셀만 알려줘.
+"매출" 시트로 월별·카테고리별 합계 새 시트 만들어줘. 원본은 그대로.
+"월별 합계"로 라인 차트 만들어서 같은 시트에 넣어줘.
+이 표를 피벗 테이블로 바꿔줘. 행=카테고리, 열=월, 값=합계.
+```
+
+### Word
+
+```
+변경 추적 켠 채로 격식있는 어조로 다듬어줘.
+맨 앞에 5줄 임원용 요약 추가해줘.
+3페이지 댓글 모두 반영해서 해당 단락 다시 써줘.
+모든 제목을 "Heading 2"로, 본문은 "Normal"로 통일해줘.
+2~4페이지에 흩어진 숫자를 항목·금액·비고 3열 표로 정리해줘.
+```
+
+### PowerPoint
+
+```
+지금 템플릿 그대로 5장 슬라이드 만들어줘: [목차…]
+3번 슬라이드 표를 네이티브 가로 막대 차트로 바꿔줘.
+선택한 슬라이드 폰트·여백·정렬 일관되게. 내용은 그대로.
+모든 슬라이드에 1분짜리 발표자 노트 추가. 청중은 임원진.
+"고객 여정" 슬라이드에 4단계 가로 흐름도 다이어그램 넣어줘.
+```
+
+---
+
+## 안전 장치
+
+| 상황 | 대처 |
+|---|---|
+| 큰 변경 전 | "바꾸기 전에 어떻게 바꿀 건지 먼저 알려줘" |
+| 결과가 이상 | `Ctrl+Z` (Office 실행 취소가 가장 확실) |
+| Claude가 헷갈려함 | 파일을 한 번 저장(`Ctrl+S`) 후 재시도 |
+| 사이드바에 Claude 없음 | Office 완전 종료 후 재실행 |
+
+---
+
+## 한계
+
+- **현재 열려 있는 파일만** 읽고 씀 — 닫힌 파일·다른 문서는 못 봄
+- **무료 Claude 계정 ❌** — Pro 이상 필요
+- **Outlook은 베타** — 별도 add-in, 본 가이드 범위 외
+
+---
+
+## 공식 링크
+
+- 제품 소개: [claude.com/claude-for-microsoft-365](https://claude.com/claude-for-microsoft-365)
+- Excel 가이드: [support.claude.com/use-claude-for-excel](https://support.claude.com/en/articles/12650343-use-claude-for-excel)
+- 앱 간 연동: [support.claude.com/work-across-microsoft-365-apps](https://support.claude.com/en/articles/13892150-work-across-microsoft-365-apps)
+- Marketplace (Excel/Word/PPT): [marketplace.microsoft.com — Claude for Microsoft 365](https://marketplace.microsoft.com/en-us/product/office/wa200010725)

@@ -16,6 +16,10 @@ const navItems: NavItem[] = [
   { href: "/tools/claude/workflows", label: "실전 워크플로우" },
   { href: "/tools/claude/tips", label: "실전 팁 · FAQ" },
   { href: "/tools/claude/cheatsheet", label: "치트시트" },
+  { href: "/tools/ms365/intro", label: "[MS365] 소개" },
+  { href: "/tools/ms365/setup", label: "[MS365] 설치 가이드" },
+  { href: "/tools/ms365/basics", label: "[MS365] 첫 사용법" },
+  { href: "/tools/ms365/cheatsheet", label: "[MS365] 치트시트" },
 ];
 
 function isActive(pathname: string, href: string): boolean {

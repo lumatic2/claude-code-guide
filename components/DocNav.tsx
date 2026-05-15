@@ -1,6 +1,8 @@
 import Link from "next/link";
 
-const pages = [
+type Page = { href: string; label: string };
+
+const defaultPages: Page[] = [
   { href: "/tools/claude/setup", label: "설치 가이드" },
   { href: "/tools/claude/intro", label: "입문 소개" },
   { href: "/tools/claude/basics", label: "기본 사용법" },
@@ -10,7 +12,7 @@ const pages = [
   { href: "/tools/claude/cheatsheet", label: "치트시트" },
 ];
 
-export default function DocNav({ current }: { current: string }) {
+export default function DocNav({ current, pages = defaultPages }: { current: string; pages?: Page[] }) {
   const idx = pages.findIndex((p) => p.href === current);
   const prev = idx > 0 ? pages[idx - 1] : null;
   const next = idx < pages.length - 1 ? pages[idx + 1] : null;
