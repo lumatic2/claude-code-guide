@@ -31,6 +31,26 @@ const tools: Tool[] = [
     entryLabel: "MS365 트랙 시작",
     status: "ready",
   },
+  {
+    slug: "chatgpt",
+    title: "ChatGPT",
+    tagline: "OpenAI의 대표 챗봇·GPT 빌더",
+    description:
+      "데스크톱 앱·웹·모바일·맞춤 GPT 만들기까지. 입문자용 가이드 콘텐츠를 작성 중입니다.",
+    entryHref: "/tools/chatgpt",
+    entryLabel: "준비 중",
+    status: "soon",
+  },
+  {
+    slug: "gemini",
+    title: "Gemini",
+    tagline: "Google의 AI · Workspace 통합",
+    description:
+      "Gemini 웹·Workspace 통합·NotebookLM·Code Assist까지. 입문자용 가이드 콘텐츠를 작성 중입니다.",
+    entryHref: "/tools/gemini",
+    entryLabel: "준비 중",
+    status: "soon",
+  },
 ];
 
 export default function ToolsCatalogPage() {
