@@ -17,5 +17,6 @@ playwright-report/
 test-results/
 .playwright-mcp/
 ms365-*.png
+phase2-*.png
 tests/__screenshots__/*-actual.png
 tests/__screenshots__/*-diff.png

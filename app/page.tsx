@@ -28,18 +28,26 @@ export default function Home() {
           <img src="/claude-icon.svg" alt="Claude Code" width={96} height={96} />
         </div>
         <h1 className="text-4xl font-bold tracking-tight text-zinc-50 sm:text-5xl lg:text-6xl">
-          Claude Code
+          AI 학습 허브
         </h1>
-        <p className="max-w-lg text-base sm:text-lg text-zinc-400 leading-relaxed px-4 sm:px-0">
-          Claude Code는 Claude 앱에서 대화로 실행하는 AI 에이전트입니다.<br className="hidden sm:block" />
-          <span className="sm:hidden"> </span>글쓰기 · 디자인 · 음악 · 시스템 설계
+        <p className="max-w-xl text-base sm:text-lg text-zinc-400 leading-relaxed px-4 sm:px-0">
+          처음 시작하는 사람을 위한 도구별 입문 가이드.<br className="hidden sm:block" />
+          <span className="sm:hidden"> </span>Claude Code · Microsoft 365
         </p>
-        <Link
-          href="/tools/claude/setup"
-          className="mt-2 inline-flex items-center gap-2 rounded-full bg-zinc-50 px-7 py-3 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-200"
-        >
-          입문 가이드 시작하기 →
-        </Link>
+        <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
+          <Link
+            href="/tools"
+            className="inline-flex items-center gap-2 rounded-full bg-zinc-50 px-7 py-3 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-200"
+          >
+            도구 카탈로그 보기 →
+          </Link>
+          <Link
+            href="/tools/claude/setup"
+            className="inline-flex items-center gap-2 rounded-full border border-zinc-700 px-7 py-3 text-sm font-semibold text-zinc-200 transition hover:border-zinc-500 hover:text-white"
+          >
+            Claude Code 바로 시작
+          </Link>
+        </div>
       </section>
 
       {/* Terminal Demo */}

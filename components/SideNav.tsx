@@ -6,21 +6,42 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 type NavItem = { href: string; label: string; external?: boolean };
+type NavSection = { section: string; items: NavItem[] };
+type NavEntry = NavItem | NavSection;
 
-const navItems: NavItem[] = [
+const navEntries: NavEntry[] = [
   { href: "/", label: "홈" },
-  { href: "/tools/claude/setup", label: "설치 가이드" },
-  { href: "/tools/claude/intro", label: "입문 소개" },
-  { href: "/tools/claude/basics", label: "기본 사용법" },
-  { href: "/tools/claude/advanced", label: "고급 설정" },
-  { href: "/tools/claude/workflows", label: "실전 워크플로우" },
-  { href: "/tools/claude/tips", label: "실전 팁 · FAQ" },
-  { href: "/tools/claude/cheatsheet", label: "치트시트" },
-  { href: "/tools/ms365/intro", label: "[MS365] 소개" },
-  { href: "/tools/ms365/setup", label: "[MS365] 설치 가이드" },
-  { href: "/tools/ms365/basics", label: "[MS365] 첫 사용법" },
-  { href: "/tools/ms365/cheatsheet", label: "[MS365] 치트시트" },
+  { href: "/tools", label: "도구 카탈로그" },
+  {
+    section: "Claude Code",
+    items: [
+      { href: "/tools/claude/setup", label: "설치 가이드" },
+      { href: "/tools/claude/intro", label: "입문 소개" },
+      { href: "/tools/claude/basics", label: "기본 사용법" },
+      { href: "/tools/claude/advanced", label: "고급 설정" },
+      { href: "/tools/claude/workflows", label: "실전 워크플로우" },
+      { href: "/tools/claude/tips", label: "실전 팁 · FAQ" },
+      { href: "/tools/claude/cheatsheet", label: "치트시트" },
+    ],
+  },
+  {
+    section: "Microsoft 365",
+    items: [
+      { href: "/tools/ms365/intro", label: "소개" },
+      { href: "/tools/ms365/setup", label: "설치 가이드" },
+      { href: "/tools/ms365/basics", label: "첫 사용법" },
+      { href: "/tools/ms365/cheatsheet", label: "치트시트" },
+    ],
+  },
 ];
+
+const flatNavItems: NavItem[] = navEntries.flatMap((e) =>
+  "section" in e ? e.items : [e],
+);
+
+function isNavSection(e: NavEntry): e is NavSection {
+  return "section" in e;
+}
 
 function isActive(pathname: string, href: string): boolean {
   if (href === "/") {
@@ -89,14 +110,84 @@ export default function SideNav() {
   }, [pathname]);
 
   const activeLabel =
-    navItems.find((item) => isActive(pathname, item.href))?.label ?? "메뉴";
+    flatNavItems.find((item) => isActive(pathname, item.href))?.label ?? "메뉴";
+
+  const renderEntries = (mobile: boolean) =>
+    navEntries.map((entry, i) => {
+      if (isNavSection(entry)) {
+        return (
+          <li key={`section-${i}`} className="pt-4 first:pt-0">
+            <p className="px-3 pb-2 text-[11px] font-semibold uppercase tracking-wide text-zinc-500">
+              {entry.section}
+            </p>
+            <ul className="space-y-1">
+              {entry.items.map((item) => (
+                <li key={item.href}>
+                  {mobile ? (
+                    <NavLink
+                      item={item}
+                      pathname={pathname}
+                      onNavigate={() => setOpen(false)}
+                    />
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className={cn(
+                        "block rounded-lg px-3 py-2 text-sm transition-colors",
+                        isActive(pathname, item.href)
+                          ? "bg-emerald-500/20 text-emerald-300"
+                          : "text-zinc-300 hover:bg-zinc-800 hover:text-white",
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </li>
+        );
+      }
+      return (
+        <li key={entry.href}>
+          {mobile ? (
+            <NavLink
+              item={entry}
+              pathname={pathname}
+              onNavigate={() => setOpen(false)}
+            />
+          ) : entry.external ? (
+            <a
+              href={entry.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block rounded-lg px-3 py-2 text-sm transition-colors text-zinc-300 hover:bg-zinc-800 hover:text-white"
+            >
+              {entry.label}
+            </a>
+          ) : (
+            <Link
+              href={entry.href}
+              className={cn(
+                "block rounded-lg px-3 py-2 text-sm transition-colors",
+                isActive(pathname, entry.href)
+                  ? "bg-emerald-500/20 text-emerald-300"
+                  : "text-zinc-300 hover:bg-zinc-800 hover:text-white",
+              )}
+            >
+              {entry.label}
+            </Link>
+          )}
+        </li>
+      );
+    });
 
   return (
     <>
       {/* Mobile top bar */}
       <div className="sticky top-0 z-40 flex items-center justify-between border-b border-zinc-800/80 bg-zinc-950/95 px-4 py-3 backdrop-blur md:hidden">
         <Link href="/" className="text-sm font-semibold text-zinc-100">
-          Claude Code Guide
+          AI Curriculum
         </Link>
         <button
           type="button"
@@ -142,7 +233,7 @@ export default function SideNav() {
           <div className="flex items-center justify-between border-b border-zinc-800/80 px-5 py-4">
             <div>
               <p className="text-xs font-medium uppercase tracking-wide text-zinc-400">
-                Claude Code Guide
+                AI Curriculum
               </p>
               <p className="mt-1 text-lg font-bold text-zinc-100">
                 {activeLabel}
@@ -161,13 +252,7 @@ export default function SideNav() {
             </button>
           </div>
           <nav className="flex-1 overflow-y-auto px-3 py-4">
-            <ul className="space-y-1">
-              {navItems.map((item) => (
-                <li key={item.href}>
-                  <NavLink item={item} pathname={pathname} onNavigate={() => setOpen(false)} />
-                </li>
-              ))}
-            </ul>
+            <ul className="space-y-1">{renderEntries(true)}</ul>
           </nav>
         </aside>
       </div>
@@ -176,38 +261,11 @@ export default function SideNav() {
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-72 border-r border-zinc-800/80 bg-zinc-950/80 p-6 md:block">
         <div className="mb-8">
           <p className="text-xs font-medium uppercase tracking-wide text-zinc-400">
-            Claude Code Guide
+            AI Curriculum
           </p>
-          <p className="mt-2 text-xl font-bold text-zinc-100">입문자 문서</p>
+          <p className="mt-2 text-xl font-bold text-zinc-100">AI 학습 허브</p>
         </div>
-        <ul className="space-y-1">
-          {navItems.map((item) => (
-            <li key={item.href}>
-              {item.external ? (
-                <a
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block rounded-lg px-3 py-2 text-sm transition-colors text-zinc-300 hover:bg-zinc-800 hover:text-white"
-                >
-                  {item.label}
-                </a>
-              ) : (
-                <Link
-                  href={item.href}
-                  className={cn(
-                    "block rounded-lg px-3 py-2 text-sm transition-colors",
-                    isActive(pathname, item.href)
-                      ? "bg-emerald-500/20 text-emerald-300"
-                      : "text-zinc-300 hover:bg-zinc-800 hover:text-white",
-                  )}
-                >
-                  {item.label}
-                </Link>
-              )}
-            </li>
-          ))}
-        </ul>
+        <ul className="space-y-1">{renderEntries(false)}</ul>
       </aside>
     </>
   );
