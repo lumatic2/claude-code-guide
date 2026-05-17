@@ -1,5 +1,5 @@
 {
-  "name": "claude-code-guide-tmp",
+  "name": "ai-guide",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint:design": "node $DESIGN_HARNESS_ROOT/scripts/lint/index.js ./DESIGN.md",
-    "build:design": "node $DESIGN_HARNESS_ROOT/scripts/lint/build.js ./DESIGN.md --out ./app/theme.generated.css"
+    "build:design": "node $DESIGN_HARNESS_ROOT/scripts/lint/build.js ./DESIGN.md --out ./app/theme.generated.css --bare"
   },
   "dependencies": {
     "@base-ui/react": "^1.3.0",

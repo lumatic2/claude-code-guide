@@ -1,7 +1,7 @@
-# AI Curriculum (구 Claude Code Guide) — Roadmap
+# AI Guide (구 Claude Code Guide) — Roadmap
 
 > AI 교육 허브(`learn.askewly.com`)로 확장 중. Claude Code 가이드는 `/tools/claude/*` 트랙으로 편입.
-> 마지막 업데이트: 2026-05-15
+> 마지막 업데이트: 2026-05-15 (Phase 2 완료)
 
 ## 현재 상태
 
@@ -25,18 +25,75 @@
 - [x] 외부 문서 도메인 갱신 (README, install.sh, skill/SKILL.md, level-3-skill.md)
 - [x] 빌드 검증 (`pnpm build` 통과, 11페이지 정적 생성, commit `1653935`)
 - [ ] 인프라 (사용자 작업): Cloudflare DNS `learn` CNAME → vercel-dns + Vercel Domains에 `learn.askewly.com` 추가, 기존 `guide.askewly.com`은 `learn.askewly.com/tools/claude`로 redirect 설정
-- [ ] 레포 rename (`claude-code-guide` → `ai-curriculum`) — 인프라 안정화 후
+- [ ] 레포 rename (`claude-code-guide` → `ai-guide`) — 인프라 안정화 후 (로컬 폴더는 2026-05-17 변경 완료)
 
-### Phase 2 — 허브 골격 (예정)
-- [x] **MS365 트랙 신설 (2026-05-15, `2234649` + `e5b44dc`)** — `/tools/ms365/{intro,setup,basics,cheatsheet}` 4페이지. Excel/Word/PPT 묶음 add-in 설치·로그인·첫 프롬프트. Marketplace vs claude.ai/downloads 구분 명시. DocNav을 `pages` prop으로 일반화, SideNav에 임시 `[MS365] *` 라벨로 4개 추가
-- [ ] 랜딩 재설계: 트랙 카탈로그 (foundations / prompt / context / harness / tools)
-- [ ] `app/tools/page.tsx` (Claude/ChatGPT/Gemini/MS365 카드)
-- [ ] SideNav 2단 구조 (트랙 선택 → 트랙 내 목차) — `[MS365] *` prefix 임시 라벨 정리
-- [ ] 빈 트랙 placeholder 페이지
+### Phase 2 — 허브 골격 (2026-05-15 완료)
+- [x] **MS365 트랙 신설 (2026-05-15, `2234649` + `e5b44dc`)** — `/tools/ms365/{intro,setup,basics,cheatsheet}` 4페이지. Excel/Word/PPT 묶음 add-in 설치·로그인·첫 프롬프트. Marketplace vs claude.ai/downloads 구분 명시. DocNav을 `pages` prop으로 일반화
+- [x] **`app/tools/page.tsx` 카탈로그 (`a3a27d7`)** — Claude/MS365/ChatGPT/Gemini 4카드, ready/soon 상태
+- [x] **SideNav 2단 구조 (`a3a27d7`)** — Claude Code / Microsoft 365 섹션 헤더, `[MS365]` 임시 prefix 제거
+- [x] **빈 트랙 placeholder (`6a3b5f5`)** — `/tools/chatgpt`, `/tools/gemini` 준비중 페이지
+- [x] **랜딩 재설계 (`006e6eb`)** — hero 아래 4카드 직접 노출, ToolCard 컴포넌트 분리로 카탈로그·랜딩 공유. 푸터·layout metadata "AI 학습 허브"로 정리
 
 ### Phase 3 — 콘텐츠 이식 (예정)
 - [ ] foundations / prompt-engineering / context-engineering / harness-engineering MDX
 - [ ] 4주 과외·3시간 강의 콘텐츠를 트랙에 매핑
+
+## SKKU RISE 세미나 (2026-05-17 제안)
+
+> 제안서: `docs/seminars/skku-rise/proposal.md` · 본 사업단 담당자 결재 대기
+
+### 다음 할 일 — 제안서 송부 후
+- [ ] 세미나 형식·일정·운영비 사업단과 협의 → 확정
+- [ ] 학생 사전 안내문 1쪽 작성 (proposal 부록 형식 따라)
+- [ ] follow-up 설문(1주 후) 양식 준비
+
+### 다음 할 일 — 모듈별 자료·라이브 시나리오 구체화
+
+각 모듈에 들어갈 캡처·공식 URL·라이브 시나리오를 사전 픽스. proposal 본문은 골격까지만 잡혀 있음.
+
+**A1. Office 문서를 AI로 만들기**
+- [ ] Claude for Office (Marketplace) add-in 설치 화면 캡처 + Word·Excel·PPT 각 사이드패널 작동 캡처 3장
+- [ ] Claude Code Skills 경로 (`/pdf`, `/generate-asset` 등) 실행 결과 PDF 1개
+- [ ] 공통 입력 데이터 1개 픽스 (예: 시장조사 노트 → 3개 포맷 동시 변환)
+- [ ] 공식 URL — Marketplace 링크 + Claude Code skills 문서
+
+**A2. 일상 도구 묶음 (Slack·Notion + LLM 3종)**
+- [ ] Notion AI Ask / Slack에서 Claude 호출 스크린샷 본인 워크플로우 캡처
+- [ ] LLM 3종 비교 — 같은 질문 3개 카테고리(사실조회·창작·코드) 미리 픽스
+- [ ] Gemini Deep Research vs ChatGPT Deep Research 결과 1쌍 캡처
+- [ ] A2 분량(35분) 안의 세부 구성 결정 (모듈 내용 좀 묽음 — 후보 5개 중 선별 필요)
+
+**B1. LLM 작동 원리**
+- [ ] OpenAI tokenizer 결과 캡처
+- [ ] Karpathy "Intro to LLMs" YouTube 링크 + 1~2분 클립 결정
+- [ ] 컨텍스트 윈도우 비교 표 — Claude / GPT / Gemini 최신 수치 (강의 직전 갱신)
+
+**B2. 영역별 AI 활용 케이스 — 마케팅 라이브**
+- [ ] 마케팅 라이브 시나리오 1개 픽스 (예: 신제품 인스타 광고 카피 3종 + A/B 안)
+- [ ] 나머지 3영역(전략·재무·생산) 1줄 케이스 — tax-agent을 재무 케이스로
+
+**B3. 프롬프트 엔지니어링**
+- [ ] v1→v5 진화 예시 미리 작성 (자기소개서/이메일/리포트 중 1개 인문계 친화 주제)
+- [ ] 나쁜 답 vs 좋은 답 캡처 2쌍 (라이브 망가질 때 백업)
+
+**B4. 컨텍스트 엔지니어링**
+- [ ] 페이크 회사 정책 PDF 1개 작성 → "첨부 전 vs 후" 결과 캡처
+- [ ] `learn.askewly.com`의 CLAUDE.md 트랙 페이지 활용 — 본인 작품 시연
+
+**B5. 하네스 엔지니어링 + 에이전트**
+- [ ] Claude Code 라이브 데모 시나리오 1개 픽스 (본인 프로젝트에서 작은 변경)
+- [ ] Anthropic "Building Effective Agents" 블로그 링크
+- [ ] 에이전트 vs 챗봇 한 장 비교 다이어그램
+
+**B6. Git·GitHub**
+- [ ] 본인 GitHub 프로필 캡처
+- [ ] 공개 레포 1개의 README/커밋 히스토리 캡처
+- [ ] 이력서·포트폴리오에 GitHub URL 들어간 예시 (본인 또는 가상)
+
+### 다음 할 일 — 샘플 산출물 (제안서 동봉)
+- [ ] 샘플 노션 안내 페이지 작성 → 공개 링크
+- [ ] AI로 만든 샘플 PPT 1개 (Claude/Codex 라이브 결과물) — 포맷 결정 (HTML·skill·Typst)
+- [ ] 데모 영상 1분 — 기존 보유 영상 큐레이션
 
 ## 완료
 
